@@ -1,24 +1,3 @@
-/*----------------------------------------------------------------------------*/
-/*                                                                            */
-/*    Module:       main.cpp                                                  */
-/*    Author:       Colson Gibby                                              */
-/*    Created:      Wed Jan 28 2026                                           */
-/*    Description:  V5 project                                                */
-/*                                                                            */
-/*----------------------------------------------------------------------------*/
-
-// ---- START VEXCODE CONFIGURED DEVICES ----
-// Robot Configuration:
-// [Name]               [Type]        [Port(s)]
-// Controller1          controller                    
-// Coloring             digital_out   A               
-// Blockingle           digital_out   B               
-// FlippyDownyThingy    digital_out   C               
-// ColorSensor          optical       11              
-// Drivetrain           drivetrain    15, 13, 17, 19, 7
-// Flap                 digital_out   E               
-// ---- END VEXCODE CONFIGURED DEVICES ----
-
 #include "vex.h"
 #include "odom.h"
 #include "Images.h"
