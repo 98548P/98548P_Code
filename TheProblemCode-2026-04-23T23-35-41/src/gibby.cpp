@@ -22,8 +22,8 @@ void enterScreen(float screenNumber) {
   if(screenNumber == 0) {
     //main screen
     Brain.Screen.clearScreen();
-    drawButton(20,20,175,50,yellow,white,1,"Match",3);
-    drawButton(20, 93, 175, 50, red, white, 2,"Odometry",3);
+    drawButton(20,20,175,50,yellow,white,1,"Match",3,prop20);
+    drawButton(20, 93, 175, 50, red, white, 2,"Odometry",3,prop20);
     Brain.Screen.setCursor(11, 3);
     Brain.Screen.setFillColor(black);
     Brain.Screen.setFont(prop20);
@@ -31,7 +31,7 @@ void enterScreen(float screenNumber) {
   } else if (screenNumber == 1) {
     //match auton selector screen
     Brain.Screen.clearScreen();
-    drawButton(1,1,100,100,green, white,0,"button",5);
+    drawButton(1,1,100,100,green, white,0,"button",5,prop20);
     Brain.Screen.setCursor(9, 20);
     Brain.Screen.setFillColor(black);
     Brain.Screen.print(defSplash());
@@ -42,10 +42,10 @@ void enterScreen(float screenNumber) {
         snprintf(buffer, 50, "%.2f", robotX);
         const char* c = buffer;
     Brain.Screen.clearScreen();
-    drawButton(20, 20, 90, 40, blue, white, 2, c, 3); 
+    drawButton(20, 20, 90, 40, blue, white, 2, c, 3,prop10); 
     snprintf(buffer, 50, "%.2f", robotY);
     const char* d = buffer;
-    drawButton(20, 83, 90, 40, blue, white, 2, d, 3); 
+    drawButton(20, 83, 90, 40, blue, white, 2, d, 3,prop10); 
   int gridSize = 6;
   int squareSize = 35;
 
@@ -81,13 +81,13 @@ wait(15, msec);
   }
 }
 
-void drawButton (int x, int y, int width, int height, color fillColor, color outlineColor, float screenNumber, const char *text, int thickness) {
+void drawButton (int x, int y, int width, int height, color fillColor, color outlineColor, float screenNumber, const char *text, int thickness, const char *font) {
   Brain.Screen.setFillColor(fillColor);
   Brain.Screen.setPenColor(outlineColor);
   Brain.Screen.setPenWidth(thickness);
   Brain.Screen.drawRectangle(x, y, width, height);
   Brain.Screen.setPenColor(white);
-  Brain.Screen.setFont(prop20);
+  Brain.Screen.setFont(font);
   int textWidth = Brain.Screen.getStringWidth(text);
   int textHeight = Brain.Screen.getStringHeight(text);
   int textX = x + (width / 2) - (textWidth / 2);
