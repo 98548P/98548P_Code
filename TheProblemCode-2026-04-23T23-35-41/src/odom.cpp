@@ -26,33 +26,6 @@ double degToInches(double deg){
   return (deg / 360.0) * (M_PI * 2);
 }
 
-/*
-void calculateOdometry(){
-  double sideWheelOffset = 3; // distance from robot center
-
-  double forward = degToInches(forwardWheel.position(deg));
-  double side = degToInches(strafeWheel.position(deg));
-
-  double deltaForward = forward - prevForward;
-  double deltaSide = side - prevSide;
-
-  prevForward = forward;
-  prevSide = side;
-
-  double robotHeading = InertialSensor.rotation(deg) * M_PI / 180.0;
-  robotHeading = wrapAngle(robotHeading);
-
-  double deltaHeading = robotHeading - prevHeading;
-  deltaSide -= deltaHeading * sideWheelOffset;
-  prevHeading = robotHeading;
-
-  double dx = deltaForward * cos(robotHeading) - deltaSide * sin(robotHeading);
-  double dy = deltaForward * sin(robotHeading) + deltaSide * cos(robotHeading);
-
-  robotX += dx;
-  robotY += dy;
-}
-*/
 
 void calculateOdometry(){
 

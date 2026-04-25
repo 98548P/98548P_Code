@@ -87,7 +87,7 @@ event skki = event();
 
 
 void onevent_Brain_screen_pressed_0() {
-  enterScreen(0);
+  enterScreen(screen);
 }
   /*
   if (myVariable == 0.0) {

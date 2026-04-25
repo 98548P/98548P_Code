@@ -18,11 +18,11 @@ void randSeed() {
 }
 
 void enterScreen(float screenNumber) {
-  screenNumber = screen;
+  screen = screenNumber;
   if(screenNumber == 0) {
     //main screen
     Brain.Screen.clearScreen();
-    drawButton(20,20,175,50,yellow,white,1,"match",3);
+    drawButton(20,20,175,50,yellow,white,1,"Match",3);
     drawButton(20, 93, 175, 50, red, white, 2,"Odometry",3);
     Brain.Screen.setCursor(11, 3);
     Brain.Screen.setFillColor(black);
@@ -31,7 +31,7 @@ void enterScreen(float screenNumber) {
   } else if (screenNumber == 1) {
     //match auton selector screen
     Brain.Screen.clearScreen();
-    drawButton(1,1,100,100,green, white,0,"sup",5);
+    drawButton(1,1,100,100,green, white,0,"button",5);
     Brain.Screen.setCursor(9, 20);
     Brain.Screen.setFillColor(black);
     Brain.Screen.print(defSplash());
@@ -102,12 +102,13 @@ void drawButton (int x, int y, int width, int height, color fillColor, color out
 
 const char* defSplash() {
   const char* defaultSplash[] = {
-    "Also try Minecraft!","Runs on code and bad decisions","CODE333","This side up","Field-Centric feelings","Now with thirty-seven percent more torque!","No keyboard detected, Press F1 to continue","Odom says we're fine","Sponsered by zip ties","Live, Laugh, Localize","Battery low, Confidence high","Rotation sensors my beloved","Precision-ish","Now with emotional stability","Born to intake, forced to defend","Geometry but dangerous","Wheels spinning thoughtfully","Surprisingly reversible","PID and chill","Object permanance enabled","Coded with dramatic intensity","Mildly sentient","Brakes are a mindset","Slightly ahead of schedule","sudo win_elims","ping too high for excuses","Consitently bad","PINNING","Probably within several inches","Do NOT trust the process","Chaos, but organised","I meant to do that","To tired to be mysterious","The cake is a lie","The inner machinations of my mind are an enigma","We do what we must because we can","We scare because we care","what","You may have a very minor case of serious brain damage","So im glad i got burned think of all the things we learned","Notebook about the code","Blame it on Dawn","Wario Style"
+    "Also try Minecraft!","Runs on code and bad decisions","CODE333","This side up","Field-Centric feelings","Now with thirty-seven percent more torque!","No keyboard detected, Press F1 to continue","Odom says we're fine","Sponsored by zip ties","Live, Laugh, Localize","Battery low, Confidence high","Rotation sensors my beloved","Precision-ish","Now with emotional stability","Born to intake, forced to defend","Geometry but dangerous","Wheels spinning thoughtfully","Surprisingly reversible","PID and chill","Object permanence enabled","Coded with dramatic intensity","Mildly sentient","Brakes are a mindset","Slightly ahead of schedule","sudo win_elims","ping too high for excuses","Consistently bad","PINNING","Probably within several inches","Do NOT trust the process","Chaos, but organised","I meant to do that","Too tired to be mysterious","The cake is a lie","The inner machinations of my mind are an enigma","We do what we must because we can","We scare because we care","what","You may have a very minor case of serious brain damage","So im glad i got burned think of all the things we learned","Notebook about the code","Blame it on Dawn","Wario Style","We tested this. Once"
   };
   if(randint == false) {
     randSeed();
     randint = true;
-    randomInt = rand()%43;
+   // randomInt = rand()%44;
+    randomInt = rand() % ((sizeof(defaultSplash)) / (sizeof(defaultSplash[0])));
   }
   const char* splash = defaultSplash[randomInt];
   return splash;
