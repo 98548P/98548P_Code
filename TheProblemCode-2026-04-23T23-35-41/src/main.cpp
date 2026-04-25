@@ -22,7 +22,8 @@
 #include "vex.h"
 #include "odom.h"
 #include "Images.h"
-#include "gibby.h"
+#include "UI.h"
+#include "functions.h"
 
 using namespace vex;
 
@@ -799,6 +800,7 @@ int main() {
   Controller1.ButtonDown.pressed(Middle_Goal);
   Controller1.ButtonX.pressed(pid);
   Controller1.ButtonY.pressed(onevent_Controller1ButtonY_pressed_0);
+  randSeed();
   task startObom = task(startOdom);
   enterScreen(0);
 }
