@@ -11,5 +11,5 @@
 extern float screen;
 
 extern void enterScreen(float screenNumber);
-extern void drawButton (int x, int y, int width, int height, color fillColor, color outlineColor, float screenNumber, const char *text, int thickness);
+extern void drawButton (int x, int y, int width, int height, color fillColor, color outlineColor, float screenNumber, const char *text, int thickness, const char *font);
 extern const char* defSplash();
