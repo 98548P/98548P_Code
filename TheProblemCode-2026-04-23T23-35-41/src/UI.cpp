@@ -47,12 +47,12 @@ void enterScreen(float screenNumber) {
 
       Brain.Screen.clearScreen();
 
-      drawButton(20, 20, 90, 40, blue, white, 2, c, 3,prop10); 
+      drawButton(20, 20, 90, 40, blue, white, 2, c, 3, mono12); 
 
       snprintf(buffer, 50, "%.2f", robotY);
       const char* d = buffer;
 
-      drawButton(20, 83, 90, 40, blue, white, 2, d, 3,prop10); 
+      drawButton(20, 83, 90, 40, blue, white, 2, d, 3, mono12); 
 
       int gridSize = 6;
       int squareSize = 35;
@@ -91,7 +91,7 @@ void enterScreen(float screenNumber) {
   }
 }
 
-void drawButton (int x, int y, int width, int height, color fillColor, color outlineColor, float screenNumber, const char *text, int thickness, const char *font) {
+void drawButton (int x, int y, int width, int height, color fillColor, color outlineColor, float screenNumber, const char *text, int thickness, fontType font) {
   Brain.Screen.setFillColor(fillColor);
   Brain.Screen.setPenColor(outlineColor);
   Brain.Screen.setPenWidth(thickness);
@@ -132,4 +132,3 @@ const char* defSplash() {
   const char* splash = defaultSplash[randomInt];
   return splash;
 }
-
