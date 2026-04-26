@@ -12,6 +12,5 @@ void randSeed() {
   Uptake.stop();
   wait(0.5,seconds);
   //entropy
-  seed = ((((((Intake.position(deg) + OuttakeMotorB.position(degrees)) - Uptake.position(degrees)) * InertialSensor.heading() + 1) + Drivetrain.rotation()) - (robotX * robotY)) * 1000);
-  srand(seed);
+  srand(((((((Intake.position(deg) + OuttakeMotorB.position(degrees)) - Uptake.position(degrees)) * InertialSensor.heading() + 1) + Drivetrain.rotation()) - (robotX * robotY)) * 1000));
 }
