@@ -1,4 +1,5 @@
 #include "vex.h"
+#include "Images.h"
 
 using namespace vex;
 using signature = vision::signature;
@@ -92,20 +93,15 @@ int rc_auto_loop_function_Controller1() {
  * This should be called at the start of your int main function.
  */
 void vexcodeInit( void ) {
-  Brain.Screen.print("Device initialization...");
-  Brain.Screen.setCursor(2, 1);
-  // calibrate the drivetrain Inertial
+  drawLogo();
   wait(200, msec);
   DrivetrainInertial.calibrate();
-  Brain.Screen.print("Calibrating Inertial for Drivetrain");
   // wait for the Inertial calibration process to finish
   while (DrivetrainInertial.isCalibrating()) {
     wait(25, msec);
   }
   // reset the screen now that the calibration is complete
-  Brain.Screen.clearScreen();
   Brain.Screen.setCursor(1,1);
   task rc_auto_loop_task_Controller1(rc_auto_loop_function_Controller1);
   wait(50, msec);
-  Brain.Screen.clearScreen();
 }

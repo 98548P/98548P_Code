@@ -128,15 +128,16 @@ Brain.Screen.drawLine(arrowX, arrowY, rightX, rightY);
     //this checks if a button was pressed, when the screen is redrawn
     //the screen is redrawn whenenever the brain is pressed, regardless of finger placement
     //i <3 recursion
-    enterScreen(screen);
+    if(Brain.Screen.pressing()) {
+      waitUntil(Brain.Screen.pressing() == false);
+      enterScreen(screen);
+    }
   }
 }
 
 int drawButton (int x, int y, int width, int height, color fillColor, color outlineColor, float screenNumber, const char *text, int thickness, fontType font) {
-  Brain.Screen.setFillColor(fillColor);
   Brain.Screen.setPenColor(outlineColor);
   Brain.Screen.setPenWidth(thickness);
-  Brain.Screen.drawRectangle(x, y, width, height);
   Brain.Screen.setPenColor(white);
   Brain.Screen.setFont(font);
 
@@ -146,17 +147,22 @@ int drawButton (int x, int y, int width, int height, color fillColor, color outl
   int textHeight = Brain.Screen.getStringHeight(text);
   int textX = x + (width / 2) - (textWidth / 2);
   int textY = y + (height /2) + (textHeight / 4);
-  Brain.Screen.printAt(textX, textY, text);
 
-  //checks if finger is inside of button and waits until button is realessed until triggering
+
   //technicly this causes recursion, but i dont care
   //also i cant spell
   if(Brain.Screen.pressing() == true && Brain.Screen.xPosition() > x && Brain.Screen.yPosition() > y && Brain.Screen.xPosition() < (x + width) && Brain.Screen.yPosition() < (y + height)) {
-    waitUntil(Brain.Screen.pressing() == false);
     screen = screenNumber;
+    Brain.Screen.setFillColor(fillColor + 100);
+    Brain.Screen.drawRectangle(x - 6, y - 6, width + 12, height + 12);
+      Brain.Screen.printAt(textX, textY, text);
     return 1;
-  }
+  } else {
+    Brain.Screen.setFillColor(fillColor);
+    Brain.Screen.drawRectangle(x, y, width, height);
+      Brain.Screen.printAt(textX, textY, text);
   return 0;
+  }
 }
 
 const char* defSplash() {
@@ -165,7 +171,7 @@ int wow = 0;
   //splash text
   
   const char* defaultSplash[] = {
-    "Also try Minecraft!","Runs on code and bad decisions","CODE333","This side up","Field-Centric feelings","Now with thirty-seven percent more torque!","No keyboard detected, Press F1 to continue","Odom says we're fine","Sponsored by zip ties","Live, Laugh, Localize","Battery low, Confidence high","Rotation sensors my beloved","Precision-ish","Now with emotional stability","Born to intake, forced to defend","Geometry but dangerous","Wheels spinning thoughtfully","Surprisingly reversible","PID and chill","Object permanence enabled","Coded with dramatic intensity","Mildly sentient","Brakes are a mindset","Slightly ahead of schedule","sudo win_elims","ping too high for excuses","Consistently bad","PINNING","Probably within several inches","Do NOT trust the process","Chaos, but organised","I meant to do that","Too tired to be mysterious","The cake is a lie","The inner machinations of my mind are an enigma","We do what we must because we can","We scare because we care","what","Did well...enough","That's what  -She","Notebook about the code","Blame it on Dawn","Wario Style","We tested this. Once","Am I a bucket?","Air pressure now at 200 PSI"
+    "Also try Minecraft!","Runs on code and bad decisions","CODE333","This side up","Field-Centric feelings","Now with thirty-seven percent more torque!","No keyboard detected, Press F1 to continue","Odom says we're fine","Sponsored by zip ties","Live, Laugh, Localize","Battery low, Confidence high","Rotation sensors my beloved","Precision-ish","Now with emotional stability","Born to intake, forced to defend","Geometry but dangerous","Wheels spinning thoughtfully","Surprisingly reversible","PID and chill","Object permanence enabled","Coded with dramatic intensity","Mildly sentient","Brakes are a mindset","Slightly ahead of schedule","sudo win_elims","ping too high for excuses","Consistently bad","PINNING","Probably within several inches","Do NOT trust the process","Chaos, but organised","I meant to do that","Too tired to be mysterious","The cake is a lie","The inner machinations of my mind are an enigma","We do what we must because we can","We scare because we care","what","Did well...enough","That's what  -She","Notebook about the code","Blame it on Dawn","Wario Style","We tested this. Once","Am I a bucket?","Air pressure now at 200 PSI","Also try Terraria!"
   };
   if(randint == false) {
     randint = true;
