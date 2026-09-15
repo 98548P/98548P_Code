@@ -1,0 +1,18 @@
+{
+	"project": {
+		"name": "TheProblemCode",
+		"slot": 1,
+		"description": "To truly understand the orgin of this code we must go back 70 million years, to the time of the trex. You see this was a ver",
+		"platform": "V5",
+		"creationDate": "Tue, 15 Sep 2026 21:29:16 GMT",
+		"language": "cpp",
+		"sdkVersion": "V5_20240802_15_00_00",
+		"cpp": {
+			"includePath": []
+		}
+	},
+	"extension": {
+		"version": "0.8.2026020401",
+		"json": 1
+	}
+}
