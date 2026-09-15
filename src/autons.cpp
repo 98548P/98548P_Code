@@ -1,5 +1,5 @@
 #include "vex.h"
-//johm
+
 float autonNumber;
 
 int testAuton = 0;
