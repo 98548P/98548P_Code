@@ -1,5 +1,5 @@
 #include "vex.h"
-  //hisam
+
 motor leftA(PORT15, ratio6_1, false);
 motor leftB(PORT13, ratio6_1, false);
 motor rightA(PORT17, ratio6_1, true);
