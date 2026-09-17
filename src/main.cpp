@@ -151,14 +151,14 @@ int main() {
   Intake.setVelocity(100,percent);
   Uptake.setVelocity(100,percent);
   OuttakeMotorB.setVelocity(100,percent);
-  Controller1.ButtonA.pressed(onevent_Controller1ButtonA_pressed_0);
-  Controller1.ButtonB.pressed(onevent_Controller1ButtonB_pressed_0);
+  //Controller1.ButtonA.pressed(onevent_Controller1ButtonA_pressed_0);
+  //Controller1.ButtonB.pressed(onevent_Controller1ButtonB_pressed_0);
   //Drivetrain.setDriveVelocity();
   //Controller1.ButtonR1.pressed();
   //Controller1.ButtonUp.pressed();
   //Controller1.ButtonDown.pressed();
-  //Controller1.ButtonX.pressed();
-  Controller1.ButtonY.pressed(onevent_Controller1ButtonY_pressed_0);
+  //Controller1.ButtonX.pressed(PIcount);
+  //Controller1.ButtonY.pressed(onevent_Controller1ButtonY_pressed_0);
   randSeed();
   task startObom = task(startOdom);
   enterScreen(0);

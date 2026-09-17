@@ -9,3 +9,5 @@
 #include "robot-config.h"
 
 extern void randSeed();
+extern double calculatePI(double n);
+extern void PIcount();
