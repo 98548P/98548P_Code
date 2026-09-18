@@ -1,8 +1,23 @@
+#include "odom.h"
+#include "UI.h"
+#include "functions.h"
+
+using namespace vex;
+
 #include "vex.h"
+#include <iostream>
+
+using namespace std;
 
 int Picount = 0;
 
-
+double factorial(int n) {
+    double fact = 1.0;
+    for (int i = 1; i <= n; ++i) {
+        fact *= i;
+    }
+    return fact;
+}
 
 int randomInt(int max) {
     int random = rand()%max;
@@ -11,48 +26,44 @@ int randomInt(int max) {
 
 void randSeed() {
   Uptake.setStopping(coast);
-  Uptake.spin(forward);
+  Uptake.spin(vex::forward);
   wait(0.5, seconds);
   Uptake.stop();
   wait(0.5,seconds);
   //entropy
   //srand(((((((Intake.position(deg) + OuttakeMotorB.position(degrees)) - Uptake.position(degrees)) * InertialSensor.heading() + 1) + Drivetrain.rotation()) - (robotX * robotY)) * 1000));
         srand((Brain.Timer.time(msec)));
+        
 }
 
-
-
+/*
 double calculatePI(double n) {
-// Source - https://stackoverflow.com/q/70123672
-// Posted by dapet, modified by community. See post 'Timeline' for change history
-// Retrieved 2026-09-17, License - CC BY-SA 4.0
-    int i;
-    double x,y, distance;
-    double num_point_circle = 0;
-    double num_point_total = 0;
-    double final;
-
-    for (i=0; i<n; i++)
-    {
-    x = (double)rand() / RAND_MAX;
-    y = (double)rand() / RAND_MAX;
-        distance = sqrt(x*x + y*y);
-        if (distance <= 1)
-        {
-            num_point_circle+=1;
-        }
-        num_point_total+=1;
+    double pi = 3.0;
+    double sign = 1.0;
+    
+    for (int i = 1; i <= n; i++) {
+        double term = 2.0 * i;
+        pi += sign * (4.0 / (term * (term + 1.0) * (term + 2.0)));
+        sign *= -1.0; // Alternate between addition and subtraction
     }
-    final = ((4 * num_point_circle) / num_point_total);
-    return final;
-
+    return pi;
 }
+
 
 void PIcount()  {
+    std::setprecision(100);
   Picount = Picount + 1;
-  char buffer[50];
-  snprintf(buffer, 50, "%.10f",calculatePI(10) );
+  char buffer[100];
+    drawButton(0, 0, 480, 272, black, white, 3, "", 0, mono15, false);
+ snprintf(buffer, 100, "%.30f",calculatePI(100) );
   const char* P = buffer;
-  drawButton(0, 0, 480, 272, black, white, 3, P, 0, mono60, false);
-  
+
+  int textWidth = Brain.Screen.getStringWidth(P);
+  int textHeight = Brain.Screen.getStringHeight(P);
+  int textX = (480 / 2) - (textWidth);
+  int textY = (272 /2) + (textHeight / 4);
+  Brain.Screen.printAt(textX, textY, P);
+
 }
+
+*/

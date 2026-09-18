@@ -11,3 +11,4 @@
 extern void randSeed();
 extern double calculatePI(double n);
 extern void PIcount();
+extern double factorial(int n);

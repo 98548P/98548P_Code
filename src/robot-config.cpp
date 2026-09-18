@@ -18,7 +18,7 @@ motor_group RightDriveSmart = motor_group(rightMotorA, rightMotorB);
 inertial DrivetrainInertial = inertial(PORT1);
 smartdrive Drivetrain = smartdrive(LeftDriveSmart, RightDriveSmart, DrivetrainInertial, 319.19, 320, 40, mm, 1);
 motor OUT = motor(PORT9, ratio18_1, true);
-motor IN = motor(PORT11, ratio18_1, true);
+motor IN = motor(PORT11, ratio6_1, true);
 motor_group OUTIN = motor_group(OUT, IN);
 
 // VEXcode generated functions
@@ -27,7 +27,7 @@ bool RemoteControlCodeEnabled = true;
 
 
 void vexcodeInit( void ) {
-  Controlle();
+  task RemoteControl (Controlle);
 
  // DrivetrainInertial.calibrate();
   Brain.Screen.drawImageFromFile("98548logobrain.png", 0, 0);
@@ -37,23 +37,21 @@ void vexcodeInit( void ) {
   wait(50, msec);
 }
 
-task Controlle() {
+int Controlle() {
 
   while(1) {
 
-      LeftDriveSmart.setVelocity(Controller1.Axis3.position(), percent);
-      RightDriveSmart.setVelocity(Controller1.Axis2.position(), percent);
 
       if(fabs(Controller1.Axis3.position()) < 5) {
         LeftDriveSmart.stop();
       } else {
-        LeftDriveSmart.spin(forward);
+        LeftDriveSmart.spin(forward,Controller1.Axis3.position(),percent);
       }
 
       if(fabs(Controller1.Axis2.position()) < 5) {
         RightDriveSmart.stop();
       } else {
-        RightDriveSmart.spin(forward);
+        RightDriveSmart.spin(forward,Controller1.Axis2.position(),percent);;
       }
 
       if(Controller1.ButtonL1.pressing()) {

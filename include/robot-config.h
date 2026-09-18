@@ -12,4 +12,17 @@ extern smartdrive Drivetrain;
  * This should be called at the start of your int main function.
  */
 void  vexcodeInit( void );
-extern task Controlle();
+extern int Controlle();
+
+extern controller Controller1;
+extern motor leftMotorA;
+extern motor leftMotorB ;
+extern motor_group LeftDriveSmart;
+extern motor rightMotorA ;
+extern motor rightMotorB ;
+extern motor_group RightDriveSmart;
+extern inertial DrivetrainInertial ;
+extern smartdrive Drivetrain ;
+extern motor OUT ;
+extern motor IN ;
+extern motor_group OUTIN ;
