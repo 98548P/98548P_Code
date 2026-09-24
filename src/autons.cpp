@@ -5,7 +5,7 @@ float autonNumber;
 int testAuton = 0;
 
 void SkillAuton () {
-
+  Drivetrain.driveFor(forward, 90, inches);
 }
 
 void BlueLeft1 () {

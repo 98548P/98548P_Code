@@ -35,7 +35,7 @@ void randSeed() {
         srand((Brain.Timer.time(msec)));
         
 }
-//lester
+
 /*
 double calculatePI(double n) {
     double pi = 3.0;

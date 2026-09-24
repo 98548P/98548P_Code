@@ -138,7 +138,6 @@ void VEXcode_auton_task() {
 
 int main() {
   vex::competition::bStopTasksBetweenModes = false;
-  std::cout << "yo" << std::endl;
   Competition.autonomous(VEXcode_auton_task);
   Competition.drivercontrol(VEXcode_driver_task);
 
@@ -162,7 +161,7 @@ int main() {
   //Controller1.ButtonR1.pressed();
   //Controller1.ButtonUp.pressed();
   //Controller1.ButtonDown.pressed();
-  Controller1.ButtonX.pressed(PIcount);
+  //Controller1.ButtonX.pressed(PIcount);
   //Controller1.ButtonY.pressed(onevent_Controller1ButtonY_pressed_0);
   randSeed();
   OUTIN.setVelocity(100,percent);
