@@ -9,12 +9,10 @@ motor_group LeftDrive(leftA, leftB);
 motor_group RightDrive(rightA, rightB);
 
 inertial InertialSensor(PORT7);
-rotation spinny(PORT11, false);
 
 float drive_kP = 0.0525;
 float drive_kI = 0.007;
 float drive_kD = 0.0078;
-float drive_turn_kP = 0.8;
    
 float turn_kP = 0.42;
 float turn_kI = 0.0;

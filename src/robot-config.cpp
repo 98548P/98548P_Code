@@ -17,8 +17,8 @@ motor rightMotorB = motor(PORT20, ratio6_1, true);
 motor_group RightDriveSmart = motor_group(rightMotorA, rightMotorB);
 inertial DrivetrainInertial = inertial(PORT1);
 smartdrive Drivetrain = smartdrive(LeftDriveSmart, RightDriveSmart, DrivetrainInertial, 319.19, 320, 40, mm, 1);
-motor OUT = motor(PORT9, ratio18_1, true);
-motor IN = motor(PORT11, ratio6_1, true);
+motor OUT = motor(PORT19, ratio6_1, false);
+motor IN = motor(PORT20, ratio18_1, true);
 motor_group OUTIN = motor_group(OUT, IN);
 
 // VEXcode generated functions
@@ -54,9 +54,9 @@ int Controlle() {
         RightDriveSmart.spin(forward,Controller1.Axis2.position(),percent);;
       }
 
-      if(Controller1.ButtonL1.pressing()) {
+      if(Controller1.ButtonR1.pressing()) {
         OUTIN.spin(forward);
-      } else if(Controller1.ButtonL2.pressing()) {
+      } else if(Controller1.ButtonR2.pressing()) {
         OUTIN.spin(reverse);
       } else {
         OUTIN.stop();
