@@ -9,17 +9,20 @@ brain  Brain;
 
 // VEXcode device constructors
 controller Controller1 = controller(primary);
-motor leftMotorA = motor(PORT8, ratio6_1, false);
+motor leftMotorA = motor(PORT9, ratio6_1, false);
 motor leftMotorB = motor(PORT10, ratio6_1, false);
 motor_group LeftDriveSmart = motor_group(leftMotorA, leftMotorB);
-motor rightMotorA = motor(PORT9, ratio6_1, true);
-motor rightMotorB = motor(PORT11, ratio6_1, true);
+motor rightMotorA = motor(PORT2, ratio6_1, true);
+motor rightMotorB = motor(PORT4, ratio6_1, true);
 motor_group RightDriveSmart = motor_group(rightMotorA, rightMotorB);
 inertial DrivetrainInertial = inertial(PORT1);
 smartdrive Drivetrain = smartdrive(LeftDriveSmart, RightDriveSmart, DrivetrainInertial, 319.19, 320, 40, mm, 1);
 motor OUT = motor(PORT20, ratio6_1, true);
 motor IN = motor(PORT19, ratio18_1, false);
 motor_group OUTIN = motor_group(OUT, IN);
+motor Cascade1 = motor(PORT18, ratio36_1, true);
+motor Cascade2 = motor(PORT11, ratio36_1, false);
+motor_group Cascade = motor_group(Cascade1, Cascade2);
 
 // VEXcode generated functions
 // define variable for remote controller enable/disable
@@ -29,11 +32,12 @@ bool RemoteControlCodeEnabled = true;
 void vexcodeInit( void ) {
   task RemoteControl (Controlle);
 
- // DrivetrainInertial.calibrate();
+ 
   Brain.Screen.drawImageFromFile("98548logobrain.png", 0, 0);
   //while (DrivetrainInertial.isCalibrating()) {
  //   wait(25, msec);
  // }
+  DrivetrainInertial.calibrate();
   wait(50, msec);
 }
 
@@ -41,17 +45,16 @@ int Controlle() {
 
   while(1) {
 
-
       if(fabs(Controller1.Axis3.position()) < 5) {
         LeftDriveSmart.stop();
       } else {
-        LeftDriveSmart.spin(reverse,Controller1.Axis3.position(),percent);
+        LeftDriveSmart.spin(forward,Controller1.Axis3.position(),percent);
       }
 
       if(fabs(Controller1.Axis2.position()) < 5) {
         RightDriveSmart.stop();
       } else {
-        RightDriveSmart.spin(reverse,Controller1.Axis2.position(),percent);;
+        RightDriveSmart.spin(forward,Controller1.Axis2.position(),percent);;
       }
 
       if(Controller1.ButtonR1.pressing()) {
@@ -60,6 +63,18 @@ int Controlle() {
         OUTIN.spin(reverse);
       } else {
         OUTIN.stop();
+      }
+
+      if(Controller1.ButtonL1.pressing()) {
+        Cascade.spin(forward);
+      } else if(Controller1.ButtonL2.pressing()) {
+        if(Cascade.position(deg) >= 10) {
+          Cascade.spin(reverse);
+        } else {
+          Cascade.stop(hold);
+        }
+      } else {
+        Cascade.stop(hold);
       }
       wait(20, msec);
   }
