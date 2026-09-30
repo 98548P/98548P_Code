@@ -45,13 +45,13 @@ int Controlle() {
 
   while(1) {
 
-      if(fabs(Controller1.Axis3.position()) < 5) {
+      if(fabs(Controller1.Axis2.position()) < 5) {
         LeftDriveSmart.stop();
       } else {
         LeftDriveSmart.spin(forward,Controller1.Axis3.position(),percent);
       }
 
-      if(fabs(Controller1.Axis2.position()) < 5) {
+      if(fabs(Controller1.Axis3.position()) < 5) {
         RightDriveSmart.stop();
       } else {
         RightDriveSmart.spin(forward,Controller1.Axis2.position(),percent);;
