@@ -26,3 +26,4 @@ extern smartdrive Drivetrain ;
 extern motor OUT ;
 extern motor IN ;
 extern motor_group OUTIN ;
+extern motor_group Cascade;

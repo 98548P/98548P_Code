@@ -23,6 +23,7 @@ motor_group OUTIN = motor_group(OUT, IN);
 motor Cascade1 = motor(PORT18, ratio36_1, true);
 motor Cascade2 = motor(PORT11, ratio36_1, false);
 motor_group Cascade = motor_group(Cascade1, Cascade2);
+motor Grabber = motor(PORT7, ratio18_1, true);
 
 // VEXcode generated functions
 // define variable for remote controller enable/disable
@@ -45,16 +46,29 @@ int Controlle() {
 
   while(1) {
 
-      if(fabs(Controller1.Axis2.position()) < 5) {
+    if(testAuton){
+    char buffer[100];
+    drawButton(0, 0, 480, 272, black, white, 3, "", 0, mono15, false);
+ snprintf(buffer, 100, "%.30f",Cascade.position(deg) );
+  const char* P = buffer;
+
+  int textWidth = Brain.Screen.getStringWidth(P);
+  int textHeight = Brain.Screen.getStringHeight(P);
+  int textX = (480 / 2) - (textWidth);
+  int textY = (272 /2) + (textHeight / 4);
+  Brain.Screen.printAt(textX, textY, P);
+    }
+
+      if(abs(Controller1.Axis2.position()) < 5) {
         LeftDriveSmart.stop();
       } else {
-        LeftDriveSmart.spin(forward,Controller1.Axis3.position(),percent);
+        LeftDriveSmart.spin(forward,Controller1.Axis2.position(),percent);
       }
 
-      if(fabs(Controller1.Axis3.position()) < 5) {
+      if(abs(Controller1.Axis3.position()) < 5) {
         RightDriveSmart.stop();
       } else {
-        RightDriveSmart.spin(forward,Controller1.Axis2.position(),percent);;
+        RightDriveSmart.spin(forward,Controller1.Axis3.position(),percent);;
       }
 
       if(Controller1.ButtonR1.pressing()) {

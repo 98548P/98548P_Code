@@ -165,6 +165,7 @@ int main() {
   //Controller1.ButtonY.pressed(onevent_Controller1ButtonY_pressed_0);
   randSeed();
   OUTIN.setVelocity(100,percent);
+  Cascade.setVelocity(100,percent);
   task startObom = task(startOdom);
   enterScreen(0);
 }
