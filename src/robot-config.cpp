@@ -48,13 +48,13 @@ int Controlle() {
 
     if(testAuton){
     char buffer[100];
-    drawButton(0, 0, 480, 272, black, white, 3, "", 0, mono15, false);
- snprintf(buffer, 100, "%.30f",Cascade.position(deg) );
+    drawButton(0, 0, 480, 272, black, white, 3, "", 0, prop60, false);
+ snprintf(buffer, 100, "%.4f",Cascade.position(deg) );
   const char* P = buffer;
 
   int textWidth = Brain.Screen.getStringWidth(P);
   int textHeight = Brain.Screen.getStringHeight(P);
-  int textX = (480 / 2) - (textWidth);
+  int textX = (480 / 2) - (textWidth / 2);
   int textY = (272 /2) + (textHeight / 4);
   Brain.Screen.printAt(textX, textY, P);
     }
@@ -80,7 +80,11 @@ int Controlle() {
       }
 
       if(Controller1.ButtonL1.pressing()) {
-        Cascade.spin(forward);
+        if(Cascade.position(deg) <= 1555) {
+          Cascade.spin(forward);
+        } else {
+          Cascade.stop(hold);
+        }
       } else if(Controller1.ButtonL2.pressing()) {
         if(Cascade.position(deg) >= 10) {
           Cascade.spin(reverse);
