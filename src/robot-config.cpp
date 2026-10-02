@@ -19,11 +19,13 @@ inertial DrivetrainInertial = inertial(PORT1);
 smartdrive Drivetrain = smartdrive(LeftDriveSmart, RightDriveSmart, DrivetrainInertial, 319.19, 320, 40, mm, 1);
 motor OUT = motor(PORT20, ratio6_1, true);
 motor IN = motor(PORT19, ratio18_1, false);
-motor_group OUTIN = motor_group(OUT, IN);
+motor UP = motor(PORT7, ratio18_1, false);
+motor_group OUTIN = motor_group(OUT, IN, UP);
 motor Cascade1 = motor(PORT18, ratio36_1, true);
 motor Cascade2 = motor(PORT11, ratio36_1, false);
 motor_group Cascade = motor_group(Cascade1, Cascade2);
-motor Grabber = motor(PORT7, ratio18_1, true);
+digital_out Pin_grabber = digital_out(Brain.ThreeWirePort.A);
+digital_out Pin_lifter = digital_out(Brain.ThreeWirePort.B);
 
 // VEXcode generated functions
 // define variable for remote controller enable/disable
@@ -43,9 +45,11 @@ void vexcodeInit( void ) {
 }
 
 int Controlle() {
+  bool pnum1 = false, pnum2 = false;
 
   while(1) {
 
+/*
     if(testAuton){
     char buffer[100];
     drawButton(0, 0, 480, 272, black, white, 3, "", 0, prop60, false);
@@ -58,6 +62,7 @@ int Controlle() {
   int textY = (272 /2) + (textHeight / 4);
   Brain.Screen.printAt(textX, textY, P);
     }
+*/
 
       if(abs(Controller1.Axis2.position()) < 5) {
         LeftDriveSmart.stop();
@@ -94,6 +99,34 @@ int Controlle() {
       } else {
         Cascade.stop(hold);
       }
+
+      if(Cascade.position(turns) >= 1) {
+        if(pnum1 == false){
+            pnum1 = true;
+            Pin_lifter.set(true);
+          }
+          if(pnum2 == false){
+            pnum2 = true;
+            Pin_grabber.set(true);
+          }
+        } else {
+        if(pnum1 == true){
+            pnum1 = false;
+            Pin_lifter.set(false);
+          }
+          if(pnum2 == true){
+            pnum2 = false;
+            Pin_grabber.set(false);
+          }
+        } 
+
+        if(Controller1.ButtonA.pressing()) {
+          if(pnum2 == true){
+            pnum2 = false;
+            Pin_grabber.set(false);
+          }
+        }
+
       wait(20, msec);
   }
 }
