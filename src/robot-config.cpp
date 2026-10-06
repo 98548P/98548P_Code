@@ -15,7 +15,7 @@ motor_group LeftDriveSmart = motor_group(leftMotorA, leftMotorB);
 motor rightMotorA = motor(PORT2, ratio6_1, true);
 motor rightMotorB = motor(PORT4, ratio6_1, true);
 motor_group RightDriveSmart = motor_group(rightMotorA, rightMotorB);
-inertial DrivetrainInertial = inertial(PORT1);
+inertial DrivetrainInertial = inertial(PORT3);
 smartdrive Drivetrain = smartdrive(LeftDriveSmart, RightDriveSmart, DrivetrainInertial, 319.19, 320, 40, mm, 1);
 motor OUT = motor(PORT20, ratio6_1, true);
 motor IN = motor(PORT19, ratio18_1, false);
@@ -100,7 +100,7 @@ int Controlle() {
         Cascade.stop(hold);
       }
 
-      if(Cascade.position(turns) >= 1) {
+      if(Cascade.position(turns) >= 0.5) {
         if(pnum1 == false){
             pnum1 = true;
             Pin_lifter.set(true);

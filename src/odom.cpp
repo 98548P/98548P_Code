@@ -1,8 +1,8 @@
 #include "vex.h"
 #include "robot-config.h"
 
-rotation forwardWheel(PORT16, false);
-rotation strafeWheel(PORT11, true);
+rotation forwardWheel(PORT5, true);
+rotation strafeWheel(PORT15, false);
 
 double robotX = 0;
 double robotY = 0;
@@ -11,8 +11,8 @@ double prevSide = 0;
 double prevHeading = 0;
 double robotHeading = 0;
 
-double forwardOffset = 1.25;  // inches
-double sideOffset = 2.9;     // inches
+double forwardOffset = 1.5;  // inches
+double sideOffset = 1.5;     // inches
 
 
 double wrapAngle(double angle){
@@ -24,7 +24,7 @@ double wrapAngle(double angle){
 }
 
 double degToInches(double deg){
-  return (deg / 360.0) * (M_PI * 2);
+  return (deg / 360.0) * (M_PI * 2.75);
 }
 
 
@@ -123,9 +123,9 @@ void driveToPoint(double goalX, double goalY, bool reverse) {
   RightDrive.spin(forward, (drivePower - turnPower), percent);
   LeftDrive.spin(forward, (drivePower + turnPower), percent);
   }
-
-  }
   wait(15, msec);
+  }
+  
 }
 
 /*

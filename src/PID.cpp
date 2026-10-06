@@ -1,18 +1,18 @@
 #include "vex.h"
 
-motor leftA(PORT15, ratio6_1, false);
-motor leftB(PORT13, ratio6_1, false);
-motor rightA(PORT17, ratio6_1, true);
-motor rightB(PORT19, ratio6_1, true);
+motor leftA(PORT9, ratio6_1, false);
+motor leftB(PORT10, ratio6_1, false);
+motor rightA(PORT2, ratio6_1, true);
+motor rightB(PORT4, ratio6_1, true);
 
 motor_group LeftDrive(leftA, leftB);
 motor_group RightDrive(rightA, rightB);
 
-inertial InertialSensor(PORT7);
+inertial InertialSensor(PORT3);
 
-float drive_kP = 0.0525;
-float drive_kI = 0.007;
-float drive_kD = 0.0078;
+float drive_kP = 1.0;
+float drive_kI = 0.00;
+float drive_kD = 0.00;
    
 float turn_kP = 0.42;
 float turn_kI = 0.0;
