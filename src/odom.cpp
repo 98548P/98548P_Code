@@ -95,23 +95,26 @@ int startOdom(){
 }
 
 void driveToPoint(double goalX, double goalY, bool reverse) {
+  RemoteControlCodeEnabled = false;
   resetPID();
   double headingError;
   while(1){
-  double dx = (robotX - goalX);
-  double dy = (robotY - goalY);
+  double dx = (goalX- robotX);
+  double dy = (goalY - robotY);
 
   double d = sqrt((dx * dx)+ (dy * dy));
   if (reverse == true){
-  headingError = wrapAngle(atan2(dy, dx) - (robotHeading + 180) );
+  headingError = wrapAngle(atan2(dy, dx) - (robotHeading + M_PI) );
   } else {
   headingError = wrapAngle(atan2(dy, dx) - robotHeading);
   }
 
+  double headingErrorDeg = headingError * (180 / M_PI);
   double drivePower = drivePID(d);
-  double turnPower = turnPID(headingError);
+  double turnPower = turnPID(headingErrorDeg);
   if( (fabs(prevDriveError) < 0.5) && (fabs(turnPrevError) < 0.5) ){
-    Drivetrain.stop();
+    LeftDrive.stop();
+    RightDrive.stop();
     break;
   }
 
@@ -125,7 +128,7 @@ void driveToPoint(double goalX, double goalY, bool reverse) {
   }
   wait(15, msec);
   }
-  
+  RemoteControlCodeEnabled = true;
 }
 
 /*
@@ -134,6 +137,7 @@ void driveToPose(double goalX, double goalY, double goalHeading, bool reverse) {
 //}
 
 void lookAtPoint(double goalX, double goalY, bool reverse) {
+RemoteControlCodeEnabled = false;
   resetPID();
   double headingError;
   while(1){
@@ -144,8 +148,10 @@ void lookAtPoint(double goalX, double goalY, bool reverse) {
   } else {
   headingError = wrapAngle(atan2(dy, dx) - robotHeading);
   }
+ double headingErrorDeg = headingError * (180 / M_PI);
 
-  double turnPower = turnPID(headingError);
+  double turnPower = turnPID(headingErrorDeg);
+
   if( (fabs(turnPrevError) < 0.5) ){
     Drivetrain.stop();
     break;
@@ -155,7 +161,7 @@ void lookAtPoint(double goalX, double goalY, bool reverse) {
   RightDrive.spin(forward, (turnPower), percent);
   LeftDrive.spin(vex::reverse, (turnPower), percent);
 
-
+wait(15, msec);
   }
-  wait(15, msec);
+  RemoteControlCodeEnabled = true;
 }

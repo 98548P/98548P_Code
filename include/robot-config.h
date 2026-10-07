@@ -5,6 +5,7 @@ extern brain Brain;
 // VEXcode devices
 extern controller Controller1;
 extern smartdrive Drivetrain;
+extern bool RemoteControlCodeEnabled;
 
 /**
  * Used to initialize code/tasks/devices added using tools in VEXcode Pro.

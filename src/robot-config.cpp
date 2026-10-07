@@ -48,7 +48,7 @@ int Controlle() {
   bool pnum1 = false, pnum2 = false;
 
   while(1) {
-
+    if(RemoteControlCodeEnabled){
 /*
     if(testAuton){
     char buffer[100];
@@ -126,7 +126,7 @@ int Controlle() {
             Pin_grabber.set(false);
           }
         }
-
+      }
       wait(20, msec);
   }
 }
