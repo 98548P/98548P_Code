@@ -19,7 +19,7 @@ inertial DrivetrainInertial = inertial(PORT3);
 smartdrive Drivetrain = smartdrive(LeftDriveSmart, RightDriveSmart, DrivetrainInertial, 319.19, 320, 40, mm, 1);
 motor OUT = motor(PORT20, ratio6_1, true);
 motor IN = motor(PORT19, ratio18_1, false);
-motor UP = motor(PORT7, ratio18_1, false);
+motor UP = motor(PORT8, ratio18_1, false);
 motor_group OUTIN = motor_group(OUT, IN, UP);
 motor Cascade1 = motor(PORT18, ratio36_1, true);
 motor Cascade2 = motor(PORT11, ratio36_1, false);
@@ -45,7 +45,7 @@ void vexcodeInit( void ) {
 }
 
 int Controlle() {
-  bool pnum1 = false, pnum2 = false;
+  bool pnum1 = false, pnum2 = false, pnum3 = false;
 
   while(1) {
     if(RemoteControlCodeEnabled){
@@ -100,13 +100,14 @@ int Controlle() {
         Cascade.stop(hold);
       }
 
-      if(Cascade.position(turns) >= 0.5) {
+      if(Cascade.position(turns) >= 0.2) {
         if(pnum1 == false){
             pnum1 = true;
             Pin_lifter.set(true);
           }
           if(pnum2 == false){
             pnum2 = true;
+            pnum3 = true;
             Pin_grabber.set(true);
           }
         } else {
@@ -121,8 +122,8 @@ int Controlle() {
         } 
 
         if(Controller1.ButtonA.pressing()) {
-          if(pnum2 == true){
-            pnum2 = false;
+          if(pnum2 == true && pnum3 == true){
+            pnum3 = false;
             Pin_grabber.set(false);
           }
         }
@@ -130,4 +131,3 @@ int Controlle() {
       wait(20, msec);
   }
 }
-
