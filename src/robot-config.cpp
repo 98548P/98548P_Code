@@ -45,7 +45,7 @@ void vexcodeInit( void ) {
 }
 
 int Controlle() {
-  bool pnum1 = false, pnum2 = false;
+  bool pnum1 = false, pnum2 = false, pnum3 = false;
 
   while(1) {
     if(RemoteControlCodeEnabled){
@@ -100,13 +100,14 @@ int Controlle() {
         Cascade.stop(hold);
       }
 
-      if(Cascade.position(turns) >= 0.5) {
+      if(Cascade.position(turns) >= 0.2) {
         if(pnum1 == false){
             pnum1 = true;
             Pin_lifter.set(true);
           }
           if(pnum2 == false){
             pnum2 = true;
+            pnum3 = true;
             Pin_grabber.set(true);
           }
         } else {
@@ -121,8 +122,8 @@ int Controlle() {
         } 
 
         if(Controller1.ButtonA.pressing()) {
-          if(pnum2 == true){
-            pnum2 = false;
+          if(pnum2 == true && pnum3 == true){
+            pnum3 = false;
             Pin_grabber.set(false);
           }
         }
