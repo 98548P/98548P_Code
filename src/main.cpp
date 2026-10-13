@@ -135,6 +135,9 @@ void VEXcode_auton_task() {
   return;
 }
  
+void plzdelete() {
+  driveToPoint(0, 40, false);
+}
 
 int main() {
   vex::competition::bStopTasksBetweenModes = false;
@@ -158,7 +161,7 @@ int main() {
   //Controller1.ButtonA.pressed(onevent_Controller1ButtonA_pressed_0);
   //Controller1.ButtonB.pressed(onevent_Controller1ButtonB_pressed_0);
   //Drivetrain.setDriveVelocity();
-  //Controller1.ButtonR1.pressed();
+  Controller1.ButtonX.pressed(plzdelete);
   //Controller1.ButtonUp.pressed();
   //Controller1.ButtonDown.pressed();
   //Controller1.ButtonX.pressed(PIcount);
