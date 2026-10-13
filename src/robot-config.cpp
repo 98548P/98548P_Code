@@ -19,7 +19,7 @@ inertial DrivetrainInertial = inertial(PORT3);
 smartdrive Drivetrain = smartdrive(LeftDriveSmart, RightDriveSmart, DrivetrainInertial, 319.19, 320, 40, mm, 1);
 motor OUT = motor(PORT20, ratio6_1, true);
 motor IN = motor(PORT19, ratio18_1, false);
-motor UP = motor(PORT7, ratio18_1, false);
+motor UP = motor(PORT8, ratio18_1, false);
 motor_group OUTIN = motor_group(OUT, IN, UP);
 motor Cascade1 = motor(PORT18, ratio36_1, true);
 motor Cascade2 = motor(PORT11, ratio36_1, false);
@@ -131,4 +131,3 @@ int Controlle() {
       wait(20, msec);
   }
 }
-
