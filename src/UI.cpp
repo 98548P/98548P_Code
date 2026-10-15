@@ -457,9 +457,15 @@ Brain.Screen.drawImageFromFile("grad6.png", 0, 0);
       snprintf(buffer, 50, "%.2f", Drivetrain.temperature(percent));
       const char* c = buffer;
       
-drawButton(115, 20, 90, 40, black, white, 2, c, 3, mono20,false); 
+
+      if(Drivetrain.temperature(percent) >= 60) {
+      drawButton(20, 20, 94, 40, round(((100 - Drivetrain.temperature(percent)) / 100) * 130), red, 2, "Temp:", 3, mono20,false);
+      drawButton(115, 20, 90, 40, red, red, 2, c, 3, mono20,false); 
+      } else {
       drawButton(20, 20, 94, 40, black, white, 2, "Temp:", 3, mono20,false);
-      snprintf(buffer, 50, "%.2f", vexBatteryCapacityGet());
+      drawButton(115, 20, 90, 40, black, white, 2, c, 3, mono20,false); 
+      }
+        snprintf(buffer, 50, "%.2f", vexBatteryCapacityGet());
       const char* d = buffer;
 
       drawButton(115, 83, 90, 40, black, white, 2, d, 3, mono20,false); 
@@ -524,7 +530,7 @@ Brain.Screen.drawLine(arrowX, arrowY, rightX, rightY);
  
 
       Brain.Screen.render();
-      wait(30, msec);
+      wait(250, msec);
       }
   Brain.Screen.renderDisable();  
   } else if (screenNumber == 302) {

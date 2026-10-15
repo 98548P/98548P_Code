@@ -101,8 +101,8 @@ int Controlle() {
         Cascade.stop(hold);
       }
 
-      if(Cascade.position(turns) >= 0.2) {
-        if(pnum1 == false){
+      if(Cascade.position(turns) >= 0.1) {
+        if(pnum1 == false && Cascade.position(turns) >= 0.2){
             pnum1 = true;
             Pin_lifter.set(true);
           }

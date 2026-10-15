@@ -53,8 +53,9 @@ void calculateOdometry(){
   double localX;
   double localY;
 
+  
   // ARC MOTION CORRECTION i think
-  if((dHeading) == 0){
+  if(abs(dHeading <= 0.2)){
 
       localY = dForward;
       localX = dSide;

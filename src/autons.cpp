@@ -44,6 +44,9 @@ void BlueLeft1 () {
    wait(0.2,seconds);
    Drivetrain.stop();
   }
+  Drivetrain.drive(reverse);
+  wait(0.4,sec);
+  Drivetrain.stop();
 }
 
 void BlueLeft2 () {

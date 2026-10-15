@@ -4,6 +4,7 @@
 #include <string.h>
 #include <iostream>
 #include <iomanip>
+#include <cmath>
 
 #include "v5.h"
 #include "v5_vcs.h"
