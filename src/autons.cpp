@@ -28,7 +28,22 @@ void SkillAuton () {
 }
 
 void BlueLeft1 () {
-
+    Drivetrain.setDriveVelocity(100,percent);
+  Brain.Screen.clearScreen();
+  Drivetrain.drive(forward);
+  wait(0.4,seconds);
+  Drivetrain.stop();
+  Drivetrain.turnFor(330,degrees);
+  Drivetrain.stop();
+  for (size_t i = 0; i < 2; i++)
+  {
+  Drivetrain.drive(forward);
+  wait(2,seconds);
+  Drivetrain.stop();
+  Drivetrain.drive(reverse);
+   wait(0.2,seconds);
+   Drivetrain.stop();
+  }
 }
 
 void BlueLeft2 () {
