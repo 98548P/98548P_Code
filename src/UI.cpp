@@ -460,7 +460,7 @@ Brain.Screen.drawImageFromFile("grad6.png", 0, 0);
 
       if(Drivetrain.temperature(percent) >= 60) {
       drawButton(20, 20, 94, 40, round(((100 - Drivetrain.temperature(percent)) / 100) * 130), red, 2, "Temp:", 3, mono20,false);
-      drawButton(115, 20, 90, 40, red, red, 2, c, 3, mono20,false); 
+      drawButton(115, 20, 90, 40, round(((100 - Drivetrain.temperature(percent)) / 100) * 130), red, 2, c, 3, mono20,false); 
       } else {
       drawButton(20, 20, 94, 40, black, white, 2, "Temp:", 3, mono20,false);
       drawButton(115, 20, 90, 40, black, white, 2, c, 3, mono20,false); 
