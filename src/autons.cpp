@@ -11,7 +11,7 @@ void SkillAuton () {
   Drivetrain.drive(forward);
   wait(0.4,seconds);
   Drivetrain.stop();
-  Drivetrain.turnFor(370,degrees);
+  Drivetrain.turnFor(350,degrees);
   Drivetrain.stop();
   for (size_t i = 0; i < 2; i++)
   {
