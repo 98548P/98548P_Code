@@ -117,7 +117,7 @@ void onevent_Controller1ButtonB_pressed_0() {
 void VEXcode_driver_task() {
   // Start the driver control tasks....
 
-
+RemoteControlCodeEnabled = true;
 
 
   while(Competition.isDriverControl() && Competition.isEnabled()) {this_thread::sleep_for(10);}

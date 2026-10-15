@@ -15,8 +15,7 @@ motor_group LeftDriveSmart = motor_group(leftMotorA, leftMotorB);
 motor rightMotorA = motor(PORT2, ratio6_1, true);
 motor rightMotorB = motor(PORT4, ratio6_1, true);
 motor_group RightDriveSmart = motor_group(rightMotorA, rightMotorB);
-inertial DrivetrainInertial = inertial(PORT3);
-smartdrive Drivetrain = smartdrive(LeftDriveSmart, RightDriveSmart, DrivetrainInertial, 319.19, 320, 40, mm, 1);
+drivetrain Drivetrain = drivetrain(LeftDriveSmart, RightDriveSmart, 319.19, 320, 40, mm, 1);
 motor OUT = motor(PORT20, ratio6_1, true);
 motor IN = motor(PORT19, ratio18_1, false);
 motor UP = motor(PORT8, ratio18_1, false);
@@ -37,10 +36,10 @@ void vexcodeInit( void ) {
 
  
   Brain.Screen.drawImageFromFile("98548logobrain.png", 0, 0);
-  //while (DrivetrainInertial.isCalibrating()) {
+  //while (InertialSensor.isCalibrating()) {
  //   wait(25, msec);
  // }
-  DrivetrainInertial.calibrate();
+   InertialSensor.calibrate();
   wait(50, msec);
 }
 
@@ -49,6 +48,8 @@ int Controlle() {
 
   while(1) {
     if(RemoteControlCodeEnabled){
+
+    
 /*
     if(testAuton){
     char buffer[100];

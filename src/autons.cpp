@@ -1,11 +1,30 @@
 #include "vex.h"
+#include "robot-config.h"
 
 float autonNumber;
 
 int testAuton = 0;
 
 void SkillAuton () {
-  driveToPoint(-25,0,false);
+  Drivetrain.setDriveVelocity(100,percent);
+  Brain.Screen.clearScreen();
+  Drivetrain.drive(forward);
+  wait(0.4,seconds);
+  Drivetrain.stop();
+  Drivetrain.turnFor(370,degrees);
+  Drivetrain.stop();
+  for (size_t i = 0; i < 2; i++)
+  {
+  Drivetrain.drive(forward);
+  wait(2,seconds);
+  Drivetrain.stop();
+  Drivetrain.drive(reverse);
+   wait(0.2,seconds);
+   Drivetrain.stop();
+  }
+  Drivetrain.drive(reverse);
+  wait(0.8,sec);
+  Drivetrain.stop();
 }
 
 void BlueLeft1 () {
@@ -41,6 +60,7 @@ void RedRight2 () {
 }
 
 float runAuton() {
+  RemoteControlCodeEnabled = false;
   if ( autonNumber == 4 ) {
     SkillAuton();
   } else if ( autonNumber == 10101 ) {
@@ -60,6 +80,7 @@ float runAuton() {
   } else if ( autonNumber == 10402) {
     RedRight2();
   }
+  RemoteControlCodeEnabled = true;
   return 0;
 }
 

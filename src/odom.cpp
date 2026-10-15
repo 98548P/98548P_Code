@@ -31,18 +31,21 @@ double degToInches(double deg){
 void calculateOdometry(){
 
   // Read sensors
-  double forward = degToInches(forwardWheel.position(turns));
-  double side = degToInches(strafeWheel.position(turns));
+ // double forward = degToInches(forwardWheel.position(deg));
+ // double side = degToInches(strafeWheel.position(deg));
+ double forward = (forwardWheel.position(turns) * 2.75 * M_PI);
+ double side = (strafeWheel.position(turns) * 2.75 * M_PI);
   double heading = InertialSensor.rotation(deg) * M_PI / 180.0;
 
   // Calculate deltas
   double dForward = forward - prevForward;
   double dSide = side - prevSide;
-  double dHeading = (heading - prevHeading);
+  double dHeading = wrapAngle(heading - prevHeading);
 
   prevForward = forward;
   prevSide = side;
   prevHeading = heading;
+
 
   // Remove rotation caused by wheel offsets
   
@@ -92,12 +95,13 @@ localY * sin(avgHeading) + localX * cos(avgHeading);
   // Update position
   robotX += fieldX;
   robotY += fieldY;
-  
+  std::cout<<fieldX<<std::endl;
   
 }
 
 
 int startOdom(){
+
   forwardWheel.resetPosition();
   strafeWheel.resetPosition();
   prevForward = 0;
