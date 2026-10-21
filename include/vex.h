@@ -24,8 +24,3 @@
 
 #define repeat(iterations)                                                     \
   for (int iterator = 0; iterator < iterations; iterator++)
-
-extern motor OuttakeMotorB;
-extern motor Intake;
-extern motor Uptake;
-extern motor_group Full_intake;

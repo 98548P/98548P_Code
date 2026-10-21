@@ -25,15 +25,9 @@ int randomInt(int max) {
 }
 
 void randSeed() {
-  Uptake.setStopping(coast);
-  Uptake.spin(vex::forward);
-  wait(0.5, seconds);
-  Uptake.stop();
-  wait(0.5,seconds);
   //entropy
-  //srand(((((((Intake.position(deg) + OuttakeMotorB.position(degrees)) - Uptake.position(degrees)) * InertialSensor.heading() + 1) + Drivetrain.rotation()) - (robotX * robotY)) * 1000));
-        srand((Brain.Timer.time(msec)));
-        
+  //srand(((((((Intake.position(deg) + OuttakeMotorB.position(degrees)) - Uptake.position(degrees)) * InertialSensor.heading() + 1) + Drivetrain.rotation()) - (robotX * robotY)) * 100));
+        srand((Brain.Timer.time(msec)));      
 }
 
 /*

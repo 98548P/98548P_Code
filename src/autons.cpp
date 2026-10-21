@@ -7,20 +7,19 @@ float autonNumber;
 int testAuton = 0;
 
 void SkillAuton () {
-  Drivetrain.setDriveVelocity(100,percent); 
+  Drivetrain.setDriveVelocity(100,percent);
   Drivetrain.drive(forward);
   wait(0.4,seconds);
   Drivetrain.stop();
   Drivetrain.turnFor(330,degrees);
   Drivetrain.stop();
-  for (size_t i = 0; i < 2; i++)
-  {
-  Drivetrain.drive(forward);
-  wait(2,seconds);
-  Drivetrain.stop();
-  Drivetrain.drive(reverse);
-   wait(0.2,seconds);
-   Drivetrain.stop();
+  for (size_t i = 0; i < 2; i++) {
+    Drivetrain.drive(forward);
+    wait(2,seconds);
+    Drivetrain.stop();
+    Drivetrain.drive(reverse);
+    wait(0.2,seconds);
+    Drivetrain.stop();
   }
   Drivetrain.drive(reverse);
   wait(0.8,sec);
@@ -30,22 +29,21 @@ void SkillAuton () {
 void BlueLeft1 () {
   Drivetrain.setDriveVelocity(100,percent);
   Brain.Screen.clearScreen();
-  Drivetrain.drive(fwd);
+  Drivetrain.drive(forward);
   wait(0.4,seconds);
   Drivetrain.stop();
   Drivetrain.turnFor(330,degrees);
   Drivetrain.stop();
-  for (size_t i = 0; i < 2; i++)
-  {
-  Drivetrain.drive(forward);
-  wait(2,seconds);
-  Drivetrain.stop();
-  Drivetrain.drive(reverse);
-   wait(0.2,seconds);
-   Drivetrain.stop();
+  for (size_t i = 0; i < 2; i++) {
+    Drivetrain.drive(forward);
+    wait(2,seconds);
+    Drivetrain.stop();
+    Drivetrain.drive(reverse);
+    wait(0.2,seconds);
+    Drivetrain.stop();
   }
   Drivetrain.drive(reverse);
-  wait(0.4,sec);
+  wait(0.4,seconds);
   Drivetrain.stop();
 }
 
@@ -100,4 +98,3 @@ void runAuton() {
   }
   RemoteControlCodeEnabled = true;
 }
-

@@ -17,7 +17,6 @@ extern motor_group LeftDrive;
 extern motor_group RightDrive;
 
 extern inertial InertialSensor;
-extern rotation spinny;
 
 // Drive PID. Not tuned!
 extern float drive_kP;

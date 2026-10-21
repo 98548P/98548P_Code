@@ -9,9 +9,11 @@ brain  Brain;
 
 // VEXcode device constructors
 controller Controller1 = controller(primary);
+//Left side of the drivetrain
 motor leftMotorA = motor(PORT9, ratio6_1, false);
 motor leftMotorB = motor(PORT10, ratio6_1, false);
 motor_group LeftDriveSmart = motor_group(leftMotorA, leftMotorB);
+//Right side of the drivetrain
 motor rightMotorA = motor(PORT6, ratio6_1, true);
 motor rightMotorB = motor(PORT4, ratio6_1, true);
 motor_group RightDriveSmart = motor_group(rightMotorA, rightMotorB);
@@ -74,7 +76,7 @@ int Controlle() {
       if(abs(Controller1.Axis3.position()) < 5) {
         RightDriveSmart.stop();
       } else {
-        RightDriveSmart.spin(forward,Controller1.Axis3.position(),percent);;
+        RightDriveSmart.spin(forward,Controller1.Axis3.position(),percent);
       }
 
       if(Controller1.ButtonR1.pressing()) {

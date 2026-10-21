@@ -29,10 +29,6 @@ competition Competition;
 
 bool Goal = true, pnum2 = false, pnum1 = false;
 
-motor Intake = motor(PORT9, ratio18_1, false);
-motor Uptake = motor(PORT10, ratio18_1, true);
-motor OuttakeMotorB = motor(PORT8, ratio6_1, Goal);
-motor_group Full_intake = motor_group(Intake, Uptake, OuttakeMotorB);
 
 
 int Brain_precision = 0, Console_precision = 0, Controller1_precision = 0;
@@ -141,8 +137,7 @@ int main() {
   Competition.drivercontrol(VEXcode_driver_task);
 
   wait(15, msec);
-  
-  Full_intake.setVelocity(200, rpm);
+
 
       
 
@@ -151,9 +146,7 @@ int main() {
 
   // register event handlers
   Brain.Screen.pressed(onevent_Brain_screen_pressed_0);
-  Intake.setVelocity(100,percent);
-  Uptake.setVelocity(100,percent);
-  OuttakeMotorB.setVelocity(100,percent);
+
   Controller1.ButtonA.pressed(onevent_Controller1ButtonA_pressed_0);
   //Controller1.ButtonB.pressed(onevent_Controller1ButtonB_pressed_0);
   //Drivetrain.setDriveVelocity();
