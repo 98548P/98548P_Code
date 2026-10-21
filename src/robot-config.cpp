@@ -10,8 +10,8 @@ brain  Brain;
 // VEXcode device constructors
 controller Controller1 = controller(primary);
 //Left side of the drivetrain
-motor leftMotorA = motor(PORT9, ratio6_1, false);
-motor leftMotorB = motor(PORT10, ratio6_1, false);
+motor leftMotorA = motor(PORT10, ratio6_1, false);
+motor leftMotorB = motor(PORT9, ratio6_1, false);
 motor_group LeftDriveSmart = motor_group(leftMotorA, leftMotorB);
 //Right side of the drivetrain
 motor rightMotorA = motor(PORT6, ratio6_1, true);

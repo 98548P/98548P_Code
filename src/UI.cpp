@@ -20,6 +20,7 @@ void enterScreen(float screenNumber) {
     drawButton(20,20,175,50,yellow,white,1,"Match",3,prop20,true);
     drawButton(20, 93, 175, 50, red, white, 2,"Odometry",3,prop20,true);
     drawButton(230, 20, 175, 50, green, white, 4, "Settings", 3, prop20, true);
+    drawButton(230, 93, 175, 50, blue, white, 30101, "Temperature", 3, prop20, true);
 
     Brain.Screen.setCursor(11, 3);
     Brain.Screen.setFillColor(black);
@@ -329,7 +330,7 @@ autonNumber = 4;
   } else if (screenNumber == 4) {
     //settings screen
   Brain.Screen.drawImageFromFile("grad5.png", 0, 0);
-  drawButton(0, 200, 60, 40, orange, white, 0, "back", 3, mono12,true);
+  drawButton(0, 200, 60, 40, orange, white, 0, "Back", 3, mono12,true);
   prevScreen = 4;
       if (testAuton == 0) {
      drawButton(250, 100, 150, 50, black,white ,3,"TEST: FALSE", 3, prop20,true);
@@ -353,7 +354,7 @@ autonNumber = 4;
 
       Brain.Screen.clearScreen();
 Brain.Screen.drawImageFromFile("grad2.png", 0, 0);
-      if ((drawButton(0, 200, 60, 40, orange, white, 0, "back", 3, mono12,true) == 1)) {
+      if ((drawButton(0, 200, 60, 40, orange, white, 0, "Back", 3, mono12,true) == 1)) {
         good = false;
         screen = 0;
       }
@@ -449,7 +450,7 @@ enterScreen(prevScreen);
 
       Brain.Screen.clearScreen();
 Brain.Screen.drawImageFromFile("grad6.png", 0, 0);
-      if ((drawButton(0, 200, 60, 40, orange, white, 0, "back", 3, mono12,true) == 1)) {
+      if ((drawButton(0, 200, 60, 40, orange, white, 0, "Back", 3, mono12,true) == 1)) {
         good = false;
         screen = 0;
       }
@@ -458,14 +459,14 @@ Brain.Screen.drawImageFromFile("grad6.png", 0, 0);
       snprintf(buffer, 50, "%.2f", Drivetrain.temperature(percent));
       const char* c = buffer;
       
-      vex::color hot =  (((100 - Drivetrain.temperature(percent)) / 100) * 130);
+      vex::color hot =  (((100 - Drivetrain.temperature(percent)) / 100.00) * 130);
 
       if(Drivetrain.temperature(percent) >= 40) {
-      drawButton(20, 20, 94, 40, hot, red, 2, "Temp:", 3, mono20,false);
-      drawButton(115, 20, 90, 40, hot, red, 2, c, 3, mono20,false); 
+      drawButton(20, 20, 94, 40, hot, red, 30101, "Temp:", 3, mono20,false);
+      drawButton(115, 20, 90, 40, hot, red, 30101, c, 3, mono20,false); 
       } else {
-      drawButton(20, 20, 94, 40, black, white, 2, "Temp:", 3, mono20,false);
-      drawButton(115, 20, 90, 40, black, white, 2, c, 3, mono20,false); 
+      drawButton(20, 20, 94, 40, black, white, 30101, "Temp:", 3, mono20,false);
+      drawButton(115, 20, 90, 40, black, white, 30101, c, 3, mono20,false); 
       }
         snprintf(buffer, 50, "%.2f", vexBatteryCapacityGet());
       const char* d = buffer;
@@ -535,6 +536,35 @@ Brain.Screen.drawLine(arrowX, arrowY, rightX, rightY);
       wait(250, msec);
       }
   Brain.Screen.renderDisable();  
+  } else if (screenNumber == 30101) {
+    Brain.Screen.clearScreen();
+    bool good = true;
+    while (good == true) {
+  
+     if ((drawButton(0, 200, 60, 40, orange, white, 0, "Back", 3, mono12,true) == 1)) {
+        good = false;
+        screen = 0;
+      }
+    
+    char buffer[50];
+
+    snprintf(buffer, 50, "%.2f", rightMotorA.temperature(percent));
+    const char* z = buffer;
+    drawButton(80, 28, 80, 80, ((100 - rightMotorA.temperature(percent)) / 100.00) * 130, white, 2, z, 3, mono20,false);
+snprintf(buffer, 50, "%.2f", rightMotorB.temperature(percent));
+    const char* x = buffer;
+    drawButton(320, 28, 80, 80, ((100 - leftMotorA.temperature(percent)) / 100.00) * 130, white, 2, x, 3, mono20,false);
+snprintf(buffer, 50, "%.2f", leftMotorA.temperature(percent));
+    const char* y = buffer;
+    drawButton(80, 164, 80, 80, ((100 - rightMotorB.temperature(percent)) / 100.00) * 130, white, 2, y, 3, mono20,false);
+snprintf(buffer, 50, "%.2f", leftMotorA.temperature(percent));
+    const char* w = buffer;
+    drawButton(320, 164, 80, 80, ((100 - leftMotorB.temperature(percent)) / 100.00) * 130, white, 2, w, 3, mono20,false);
+    drawButton(0, 200, 60, 40, orange, white, 0, "Back", 3, mono12,true);
+          Brain.Screen.render();
+      wait(250, msec);
+    }
+  Brain.Screen.renderDisable();
   } else if (screenNumber == 302) {
     InertialSensor.calibrate();
     drawButton(0, 0, 480, 272, black, white, 3, "CALIBRATING", 0, mono60, false);
@@ -578,7 +608,7 @@ Brain.Screen.drawLine(arrowX, arrowY, rightX, rightY);
 
       drawButton(315, 146, 90, 40, black, white, 2, h, 3, mono20,false); 
       drawButton(220, 146, 94, 40, black, white, 2, "Turn kD", 3, mono20,false);
-      drawButton(0, 200, 60, 40, orange, white, 0, "back", 3, mono12,true);
+      drawButton(0, 200, 60, 40, orange, white, 0, "Back", 3, mono12,true);
   }
 
   
