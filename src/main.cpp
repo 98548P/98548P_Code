@@ -27,7 +27,7 @@ competition Competition;
 //                                                     
 //////////////////////////////////////////// 
 
-bool Goal = true;
+bool Goal = true, pnum2 = false, pnum1 = false;
 
 motor Intake = motor(PORT9, ratio18_1, false);
 motor Uptake = motor(PORT10, ratio18_1, true);
@@ -53,6 +53,7 @@ void onevent_Brain_screen_pressed_0() {
 
 
 int onauton_autonomous_0() {
+  runAuton();
   return 0;
 }
 
@@ -67,7 +68,8 @@ int onauton_autonomous_0() {
 ////////////////////////////////////////////
 
 void onevent_Controller1ButtonY_pressed_0() {
-
+    pnum1 = !pnum1;
+  Pin_lifter.set(pnum1);
 }
 
 void onevent_Controller1ButtonX_pressed_0() {
@@ -90,11 +92,8 @@ void onevent_Controller1ButtonR2_released_0() {
 }
 
 void onevent_Controller1ButtonA_pressed_0() {
-  if(screen == 303){
-    driveToPoint(0, 40, false);
-  } else {
-    
-  }
+  pnum2 = !pnum2;
+  Pin_grabber.set(pnum2);
 }
 
 void onevent_Controller1ButtonB_pressed_0() {
@@ -129,15 +128,12 @@ void VEXcode_auton_task() {
   // Start the auton control tasks....
 
   vex::task auto0(onauton_autonomous_0);
-  runAuton();
+  
   while(Competition.isAutonomous() && Competition.isEnabled()) {this_thread::sleep_for(10);}
   auto0.stop();
   return;
 }
  
-void plzdelete() {
-  driveToPoint(0, 40, false);
-}
 
 int main() {
   vex::competition::bStopTasksBetweenModes = false;
@@ -158,14 +154,14 @@ int main() {
   Intake.setVelocity(100,percent);
   Uptake.setVelocity(100,percent);
   OuttakeMotorB.setVelocity(100,percent);
-  //Controller1.ButtonA.pressed(onevent_Controller1ButtonA_pressed_0);
+  Controller1.ButtonA.pressed(onevent_Controller1ButtonA_pressed_0);
   //Controller1.ButtonB.pressed(onevent_Controller1ButtonB_pressed_0);
   //Drivetrain.setDriveVelocity();
-  Controller1.ButtonX.pressed(plzdelete);
+  //Controller1.ButtonX.pressed(plzdelete);
   //Controller1.ButtonUp.pressed();
   //Controller1.ButtonDown.pressed();
   //Controller1.ButtonX.pressed(PIcount);
-  //Controller1.ButtonY.pressed(onevent_Controller1ButtonY_pressed_0);
+  Controller1.ButtonY.pressed(onevent_Controller1ButtonY_pressed_0);
   randSeed();
   OUTIN.setVelocity(100,percent);
   Cascade.setVelocity(100,percent);

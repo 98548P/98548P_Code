@@ -1,13 +1,13 @@
 #include "vex.h"
 #include "robot-config.h"
+using namespace vex;
 
 float autonNumber;
 
 int testAuton = 0;
 
 void SkillAuton () {
-  Drivetrain.setDriveVelocity(100,percent);
-  Brain.Screen.clearScreen();
+  Drivetrain.setDriveVelocity(100,percent); 
   Drivetrain.drive(forward);
   wait(0.4,seconds);
   Drivetrain.stop();
@@ -28,9 +28,9 @@ void SkillAuton () {
 }
 
 void BlueLeft1 () {
-    Drivetrain.setDriveVelocity(100,percent);
+  Drivetrain.setDriveVelocity(100,percent);
   Brain.Screen.clearScreen();
-  Drivetrain.drive(forward);
+  Drivetrain.drive(fwd);
   wait(0.4,seconds);
   Drivetrain.stop();
   Drivetrain.turnFor(330,degrees);
@@ -77,7 +77,7 @@ void RedRight2 () {
 
 }
 
-float runAuton() {
+void runAuton() {
   RemoteControlCodeEnabled = false;
   if ( autonNumber == 4 ) {
     SkillAuton();
@@ -99,6 +99,5 @@ float runAuton() {
     RedRight2();
   }
   RemoteControlCodeEnabled = true;
-  return 0;
 }
 

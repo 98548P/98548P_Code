@@ -96,7 +96,6 @@ localY * sin(avgHeading) + localX * cos(avgHeading);
   // Update position
   robotX += fieldX;
   robotY += fieldY;
-  std::cout<<fieldX<<std::endl;
   
 }
 

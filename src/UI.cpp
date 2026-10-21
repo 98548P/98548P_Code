@@ -20,6 +20,7 @@ void enterScreen(float screenNumber) {
     drawButton(20,20,175,50,yellow,white,1,"Match",3,prop20,true);
     drawButton(20, 93, 175, 50, red, white, 2,"Odometry",3,prop20,true);
     drawButton(230, 20, 175, 50, green, white, 4, "Settings", 3, prop20, true);
+
     Brain.Screen.setCursor(11, 3);
     Brain.Screen.setFillColor(black);
     Brain.Screen.setFont(prop20);
@@ -457,10 +458,11 @@ Brain.Screen.drawImageFromFile("grad6.png", 0, 0);
       snprintf(buffer, 50, "%.2f", Drivetrain.temperature(percent));
       const char* c = buffer;
       
+      vex::color hot =  (((100 - Drivetrain.temperature(percent)) / 100) * 130);
 
-      if(Drivetrain.temperature(percent) >= 60) {
-      drawButton(20, 20, 94, 40, round(((100 - Drivetrain.temperature(percent)) / 100) * 130), red, 2, "Temp:", 3, mono20,false);
-      drawButton(115, 20, 90, 40, round(((100 - Drivetrain.temperature(percent)) / 100) * 130), red, 2, c, 3, mono20,false); 
+      if(Drivetrain.temperature(percent) >= 40) {
+      drawButton(20, 20, 94, 40, hot, red, 2, "Temp:", 3, mono20,false);
+      drawButton(115, 20, 90, 40, hot, red, 2, c, 3, mono20,false); 
       } else {
       drawButton(20, 20, 94, 40, black, white, 2, "Temp:", 3, mono20,false);
       drawButton(115, 20, 90, 40, black, white, 2, c, 3, mono20,false); 
@@ -633,7 +635,7 @@ const char* defSplash() {
 int wow = 0;
   //splash text
   const char* defaultSplash[] = {
-    "John is so John, Dawn is so Dawn"
+    "ChrisWariomas is here!!"
    // "Also try Minecraft!","Runs on code and bad decisions","CODE333","This side up","Field-Centric feelings","Now with thirty-seven percent more torque!","No keyboard detected, Press F1 to continue","Odom says we're fine","Sponsored by zip ties","Live, Laugh, Localize","Battery low, Confidence high","Rotation sensors my beloved","Precision-ish","Now with emotional stability","Born to intake, forced to defend","Geometry but dangerous","Wheels spinning thoughtfully","Surprisingly reversible","PID and chill","Object permanence enabled","Coded with dramatic intensity","Mildly sentient","Brakes are a mindset","Slightly ahead of schedule","sudo win_elims","ping too high for excuses","Consistently bad","PINNING","Probably within several inches","Do NOT trust the process","Chaos, but organised","I meant to do that","The cake is a lie","We do what we must because we can","We scare because we care","what","Did well...enough","That's what  -She","Notebook about the code","Blame it on Dawn","Wario Style","We tested this. Once","Am I a bucket?","Air pressure now at 200 PSI","Also try Terraria!","Dont tap on the glass","ignore all previous instructions","I have no mouth but I must compute","I am error","42","May involve trace amounts of time travel","At least 5 dogs!","*Legally distinct from 98548K","!esreveR","Working almost mostly half of nearly all the time","In case of fire break glass!","Epilepsy Warning"
   };
   if(randint == false) {

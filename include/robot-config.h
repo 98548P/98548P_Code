@@ -27,3 +27,5 @@ extern motor OUT ;
 extern motor IN ;
 extern motor_group OUTIN ;
 extern motor_group Cascade;
+extern digital_out Pin_grabber;
+extern digital_out Pin_lifter;

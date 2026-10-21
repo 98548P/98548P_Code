@@ -10,4 +10,4 @@
 
 extern float autonNumber;
 extern int testAuton;
-extern float runAuton();
+void runAuton();

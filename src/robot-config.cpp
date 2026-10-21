@@ -12,7 +12,7 @@ controller Controller1 = controller(primary);
 motor leftMotorA = motor(PORT9, ratio6_1, false);
 motor leftMotorB = motor(PORT10, ratio6_1, false);
 motor_group LeftDriveSmart = motor_group(leftMotorA, leftMotorB);
-motor rightMotorA = motor(PORT2, ratio6_1, true);
+motor rightMotorA = motor(PORT6, ratio6_1, true);
 motor rightMotorB = motor(PORT4, ratio6_1, true);
 motor_group RightDriveSmart = motor_group(rightMotorA, rightMotorB);
 drivetrain Drivetrain = drivetrain(LeftDriveSmart, RightDriveSmart, 319.19, 320, 40, mm, 1);
@@ -44,7 +44,7 @@ void vexcodeInit( void ) {
 }
 
 int Controlle() {
-  bool pnum1 = false, pnum2 = false, pnum3 = false;
+  bool pnum1 = false;
 
   while(1) {
     if(RemoteControlCodeEnabled){
@@ -101,34 +101,7 @@ int Controlle() {
         Cascade.stop(hold);
       }
 
-      if(Cascade.position(turns) >= 0.1) {
-        if(pnum1 == false && Cascade.position(turns) >= 0.2){
-            pnum1 = true;
-            Pin_lifter.set(true);
-          }
-          if(pnum2 == false){
-            pnum2 = true;
-            pnum3 = true;
-            Pin_grabber.set(true);
-          }
-        } else {
-        if(pnum1 == true){
-            pnum1 = false;
-            Pin_lifter.set(false);
-          }
-          if(pnum2 == true){
-            pnum2 = false;
-            Pin_grabber.set(false);
-          }
-        } 
-
-        if(Controller1.ButtonA.pressing()) {
-          if(pnum2 == true && pnum3 == true){
-            pnum3 = false;
-            Pin_grabber.set(false);
-          }
         }
       }
       wait(20, msec);
   }
-}
