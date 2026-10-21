@@ -7,6 +7,7 @@ float autonNumber;
 int testAuton = 0;
 
 void SkillAuton () {
+
   Drivetrain.setDriveVelocity(100,percent);
   Drivetrain.drive(forward);
   wait(0.4,seconds);
@@ -27,6 +28,7 @@ void SkillAuton () {
 }
 
 void BlueLeft1 () {
+  Drivetrain.setStopping(brake);
   Drivetrain.setDriveVelocity(100,percent);
   Brain.Screen.clearScreen();
   Drivetrain.drive(forward);

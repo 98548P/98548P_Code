@@ -4,7 +4,6 @@ extern brain Brain;
 
 // VEXcode devices
 extern controller Controller1;
-extern drivetrain Drivetrain;
 extern bool RemoteControlCodeEnabled;
 
 /**
@@ -15,17 +14,20 @@ extern bool RemoteControlCodeEnabled;
 void  vexcodeInit( void );
 extern int Controlle();
 
-extern controller Controller1;
-extern motor leftMotorA;
-extern motor leftMotorB;
 extern inertial InertialSensor;
-extern motor_group LeftDriveSmart;
-extern motor rightMotorA;
-extern motor rightMotorB;
-extern motor_group RightDriveSmart;
 extern motor OUT;
 extern motor IN;
 extern motor_group OUTIN;
 extern motor_group Cascade;
 extern digital_out Pin_grabber;
 extern digital_out Pin_lifter;
+
+//Driving colsom man
+extern motor leftMotorA;
+extern motor leftMotorB;
+extern motor_group LeftDriveSmart;
+//Right side of the drivetrain
+extern motor rightMotorA;
+extern motor rightMotorB;
+extern motor_group RightDriveSmart;
+extern drivetrain Drivetrain;

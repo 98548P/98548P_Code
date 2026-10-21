@@ -459,11 +459,11 @@ Brain.Screen.drawImageFromFile("grad6.png", 0, 0);
       snprintf(buffer, 50, "%.2f", Drivetrain.temperature(percent));
       const char* c = buffer;
       
-      vex::color hot =  (((100 - Drivetrain.temperature(percent)) / 100.00) * 130);
+    // vex::color hot = vex::color(Drivetrain.temperature(percent) * 2.55, (100 - Drivetrain.temperature(percent)) * 2.55, 0);
 
       if(Drivetrain.temperature(percent) >= 40) {
-      drawButton(20, 20, 94, 40, hot, red, 30101, "Temp:", 3, mono20,false);
-      drawButton(115, 20, 90, 40, hot, red, 30101, c, 3, mono20,false); 
+      drawButton(20, 20, 94, 40, red, white, 30101, "Temp:", 3, mono20,false);
+      drawButton(115, 20, 90, 40, red, white, 30101, c, 3, mono20,false); 
       } else {
       drawButton(20, 20, 94, 40, black, white, 30101, "Temp:", 3, mono20,false);
       drawButton(115, 20, 90, 40, black, white, 30101, c, 3, mono20,false); 
@@ -550,16 +550,16 @@ Brain.Screen.drawLine(arrowX, arrowY, rightX, rightY);
 
     snprintf(buffer, 50, "%.2f", rightMotorA.temperature(percent));
     const char* z = buffer;
-    drawButton(80, 28, 80, 80, ((100 - rightMotorA.temperature(percent)) / 100.00) * 130, white, 2, z, 3, mono20,false);
+    drawButton(80, 28, 80, 80, vex::color(rightMotorA.temperature(percent) * 2.55, (100 - rightMotorA.temperature(percent)) * 2.55, 0 ), white, 2, z, 3, mono20,false);
 snprintf(buffer, 50, "%.2f", rightMotorB.temperature(percent));
     const char* x = buffer;
-    drawButton(320, 28, 80, 80, ((100 - leftMotorA.temperature(percent)) / 100.00) * 130, white, 2, x, 3, mono20,false);
+    drawButton(320, 28, 80, 80, vex::color(rightMotorB.temperature(percent) * 2.55, (100 - rightMotorB.temperature(percent)) * 2.55, 0 ), white, 2, x, 3, mono20,false);
 snprintf(buffer, 50, "%.2f", leftMotorA.temperature(percent));
     const char* y = buffer;
-    drawButton(80, 164, 80, 80, ((100 - rightMotorB.temperature(percent)) / 100.00) * 130, white, 2, y, 3, mono20,false);
-snprintf(buffer, 50, "%.2f", leftMotorA.temperature(percent));
+    drawButton(80, 164, 80, 80, vex::color(leftMotorA.temperature(percent) * 2.55, (100 - leftMotorA.temperature(percent)) * 2.55, 0 ), white, 2, y, 3, mono20,false);
+snprintf(buffer, 50, "%.2f", leftMotorB.temperature(percent));
     const char* w = buffer;
-    drawButton(320, 164, 80, 80, ((100 - leftMotorB.temperature(percent)) / 100.00) * 130, white, 2, w, 3, mono20,false);
+    drawButton(320, 164, 80, 80, vex::color(leftMotorB.temperature(percent) * 2.55, (100 - leftMotorB.temperature(percent)) * 2.55, 0 ), white, 2, w, 3, mono20,false);
     drawButton(0, 200, 60, 40, orange, white, 0, "Back", 3, mono12,true);
           Brain.Screen.render();
       wait(250, msec);
@@ -631,7 +631,7 @@ snprintf(buffer, 50, "%.2f", leftMotorA.temperature(percent));
 int drawButton (int x, int y, int width, int height, color fillColor, color outlineColor, float screenNumber, const char *text, int thickness, fontType font, bool active) {
   Brain.Screen.setPenColor(outlineColor);
   Brain.Screen.setPenWidth(thickness);
-  Brain.Screen.setPenColor(white);
+  
   Brain.Screen.setFont(font);
 
   //centers the text inside of the buttons
