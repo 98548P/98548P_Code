@@ -10,12 +10,12 @@ brain  Brain;
 // VEXcode device constructors
 controller Controller1 = controller(primary);
 //Left side of the drivetrain
-motor leftMotorA = motor(PORT10, ratio6_1, false);
-motor leftMotorB = motor(PORT9, ratio6_1, false);
+motor leftMotorA = motor(PORT6, ratio6_1, true);
+motor leftMotorB = motor(PORT4, ratio6_1, true);
 motor_group LeftDriveSmart = motor_group(leftMotorA, leftMotorB);
 //Right side of the drivetrain
-motor rightMotorA = motor(PORT6, ratio6_1, true);
-motor rightMotorB = motor(PORT4, ratio6_1, true);
+motor rightMotorA = motor(PORT10, ratio6_1, false);
+motor rightMotorB = motor(PORT9, ratio6_1, false);
 motor_group RightDriveSmart = motor_group(rightMotorA, rightMotorB);
 drivetrain Drivetrain = drivetrain(LeftDriveSmart, RightDriveSmart, 319.19, 320, 40, mm, 1);
 motor OUT = motor(PORT20, ratio6_1, true);
@@ -67,16 +67,16 @@ int Controlle() {
     }
 */
 
-      if(abs(Controller1.Axis2.position()) < 5) {
+      if(abs(Controller1.Axis3.position()) < 5) {
         LeftDriveSmart.stop();
       } else {
-        LeftDriveSmart.spin(forward,Controller1.Axis2.position(),percent);
+        LeftDriveSmart.spin(forward,Controller1.Axis3.position(),percent);
       }
 
-      if(abs(Controller1.Axis3.position()) < 5) {
+      if(abs(Controller1.Axis2.position()) < 5) {
         RightDriveSmart.stop();
       } else {
-        RightDriveSmart.spin(forward,Controller1.Axis3.position(),percent);
+        RightDriveSmart.spin(forward,Controller1.Axis2.position(),percent);
       }
 
       if(Controller1.ButtonR1.pressing()) {
@@ -104,6 +104,6 @@ int Controlle() {
       }
 
         }
+         wait(20, msec);
       }
-      wait(20, msec);
   }

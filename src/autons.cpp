@@ -31,12 +31,13 @@ void BlueLeft1 () {
   Drivetrain.setStopping(brake);
   Drivetrain.setDriveVelocity(100,percent);
   Brain.Screen.clearScreen();
-  Drivetrain.drive(forward);
-  wait(0.4,seconds);
-  Drivetrain.stop();
+  Brain.resetTimer();
+  leftMotorA.spin(forward);
+  wait (0.4, sec);
+  leftMotorA.stop();
   Drivetrain.turnFor(330,degrees);
   Drivetrain.stop();
-  for (size_t i = 0; i < 2; i++) {
+  for (int i = 0; i < 2; i++) {
     Drivetrain.drive(forward);
     wait(2,seconds);
     Drivetrain.stop();
@@ -77,7 +78,7 @@ void RedRight2 () {
 
 }
 
-void runAuton() {
+float runAuton() {
   RemoteControlCodeEnabled = false;
   if ( autonNumber == 4 ) {
     SkillAuton();
@@ -99,4 +100,5 @@ void runAuton() {
     RedRight2();
   }
   RemoteControlCodeEnabled = true;
+  return 0;
 }
