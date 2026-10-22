@@ -9,9 +9,9 @@ int testAuton = 0;
 void SkillAuton () {
 
   Drivetrain.setDriveVelocity(100,percent);
-  Drivetrain.drive(forward);
+  OUTIN.spin(forward);
   wait(0.4,seconds);
-  Drivetrain.stop();
+  OUTIN.stop();
   Drivetrain.turnFor(330,degrees);
   Drivetrain.stop();
   for (size_t i = 0; i < 2; i++) {
