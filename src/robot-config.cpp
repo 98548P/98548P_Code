@@ -38,6 +38,8 @@ void vexcodeInit( void ) {
 
  
   Brain.Screen.drawImageFromFile("98548logobrain.png", 0, 0);
+  Controller1.Screen.setCursor(2,1);
+  Controller1.Screen.print("WIN! WIN! WIN! WIN!");
   InertialSensor.calibrate();
   while (InertialSensor.isCalibrating()) {
     wait(25, msec);
