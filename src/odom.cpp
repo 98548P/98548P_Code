@@ -11,8 +11,8 @@ double prevSide = 0;
 double prevHeading = 0;
 double robotHeading = 0;
 
-double forwardOffset = 1.5;  // inches
-double sideOffset = 1.5;     // inches
+double forwardOffset = 0;  // inches
+double sideOffset = 0;     // inches
 
 
 double wrapAngle(double angle){
@@ -31,12 +31,12 @@ double degToInches(double deg){
 void calculateOdometry(){
 
   // Read sensors
- // double forward = degToInches(forwardWheel.position(deg));
- // double side = degToInches(strafeWheel.position(deg));
- double forward = (forwardWheel.position(turns) * 2.75 * M_PI);
- double side = (strafeWheel.position(turns) * 2.75 * M_PI);
+  double forward = degToInches(forwardWheel.position(deg));
+  double side = degToInches(strafeWheel.position(deg));
+ //double forward = (forwardWheel.position(turns) * 2.75 * M_PI);
+// double side = (strafeWheel.position(turns) * 2.75 * M_PI);
   double heading = InertialSensor.rotation(deg) * M_PI / 180.0;
-
+  robotHeading = heading;
   // Calculate deltas
   double dForward = forward - prevForward;
   double dSide = side - prevSide;
@@ -55,7 +55,7 @@ void calculateOdometry(){
 
   
   // ARC MOTION CORRECTION i think
-  if(abs(dHeading <= 0.2)){
+  if(abs(dHeading) <= 0.00001){
 
       localY = dForward;
       localX = dSide;
@@ -68,11 +68,11 @@ void calculateOdometry(){
       /*
       sinTerm * (correctedForward / dHeading)
       */
-      localX = sinTerm * (dSide / dHeading) - sideOffset;
+      localX = sinTerm * ((dSide / dHeading) - sideOffset);
 /*
 sinTerm * (correctedSide / dHeading);
 */
-      localY = sinTerm * (dForward / dHeading) + forwardOffset;
+      localY = sinTerm * ((dForward / dHeading) + forwardOffset);
   }
   
 
@@ -140,8 +140,8 @@ void driveToPoint(double goalX, double goalY, bool reverse) {
   drivePower = drivePower * cos(headingError);
   if(reverse == true){
     drivePower = -drivePower;
-  RightDrive.spin(vex::reverse, (drivePower - turnPower), percent);
-  LeftDrive.spin(vex::reverse, (drivePower + turnPower), percent);
+  RightDrive.spin(forward, (drivePower - turnPower), percent);
+  LeftDrive.spin(forward, (drivePower + turnPower), percent);
   } else {
   RightDrive.spin(forward, (drivePower - turnPower), percent);
   LeftDrive.spin(forward, (drivePower + turnPower), percent);
@@ -162,7 +162,7 @@ RemoteControlCodeEnabled = false;
   double headingError;
   while(1){
   double dx = (goalX - robotX);
-  double dy = (robotY - goalY);
+  double dy = (goalY - robotY);
   if (reverse == true){
   headingError = wrapAngle(atan2(dy, dx) - (robotHeading + M_PI) );
   } else {

@@ -39,7 +39,7 @@ void vexcodeInit( void ) {
  
   Brain.Screen.drawImageFromFile("98548logobrain.png", 0, 0);
   Controller1.Screen.setCursor(2,1);
-  Controller1.Screen.print("WIN! WIN! WIN! WIN!");
+  Controller1.Screen.print("WIN! WIN! WIN!");
   InertialSensor.calibrate();
   while (InertialSensor.isCalibrating()) {
     wait(25, msec);
@@ -68,7 +68,6 @@ int Controlle() {
   Brain.Screen.printAt(textX, textY, P);
     }
 */
-
       if(abs(Controller1.Axis3.position()) < 5) {
         LeftDriveSmart.stop();
       } else {
