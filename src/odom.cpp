@@ -11,8 +11,8 @@ double prevSide = 0;
 double prevHeading = 0;
 double robotHeading = 0;
 
-double forwardOffset = 0;  // inches
-double sideOffset = 0;     // inches
+double forwardOffset = 1.5;  // inches
+double sideOffset = 1.5;     // inches
 
 
 double wrapAngle(double angle){
@@ -36,7 +36,7 @@ void calculateOdometry(){
  //double forward = (forwardWheel.position(turns) * 2.75 * M_PI);
 // double side = (strafeWheel.position(turns) * 2.75 * M_PI);
   double heading = InertialSensor.rotation(deg) * M_PI / 180.0;
-  robotHeading = heading;
+  robotHeading = wrapAngle(heading);
   // Calculate deltas
   double dForward = forward - prevForward;
   double dSide = side - prevSide;
@@ -55,7 +55,7 @@ void calculateOdometry(){
 
   
   // ARC MOTION CORRECTION i think
-  if(abs(dHeading) <= 0.00001){
+  if(fabs(dHeading) <= 0.00001){
 
       localY = dForward;
       localX = dSide;
@@ -106,6 +106,7 @@ int startOdom(){
   strafeWheel.resetPosition();
   prevForward = 0;
   prevSide = 0;
+
   while(1){
     calculateOdometry();
     wait(15,msec);
@@ -115,6 +116,8 @@ int startOdom(){
 
 void driveToPoint(double goalX, double goalY, bool reverse) {
   RemoteControlCodeEnabled = false;
+  resetPID();
+  lookAtPoint(goalX,goalY,reverse);
   resetPID();
   double headingError;
   while(1){
@@ -178,8 +181,8 @@ RemoteControlCodeEnabled = false;
   }
 
 
-  RightDrive.spin(forward, (turnPower), percent);
-  LeftDrive.spin(vex::reverse, (turnPower), percent);
+  RightDrive.spin(vex::reverse, (turnPower), percent);
+  LeftDrive.spin(vex::forward, (turnPower), percent);
 
 wait(15, msec);
   }
