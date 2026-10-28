@@ -1,8 +1,8 @@
 #include "vex.h"
 #include "robot-config.h"
 
-rotation forwardWheel(PORT5, true);
-rotation strafeWheel(PORT15, false);
+rotation forwardWheel(PORT15, false);
+rotation strafeWheel(PORT5, true);
 
 double robotX = 0;
 double robotY = 0;
@@ -11,8 +11,8 @@ double prevSide = 0;
 double prevHeading = 0;
 double robotHeading = 0;
 
-double forwardOffset = 1.5;  // inches
-double sideOffset = 1.5;     // inches
+double forwardOffset = 0;  // inches
+double sideOffset = 0;     // inches
 
 
 double wrapAngle(double angle){
@@ -72,7 +72,7 @@ void calculateOdometry(){
 /*
 sinTerm * (correctedSide / dHeading);
 */
-      localY = sinTerm * ((dForward / dHeading) + forwardOffset);
+      localY = sinTerm * ((dForward / dHeading) - forwardOffset);
   }
   
 
@@ -87,11 +87,11 @@ robotHeading - (dHeading/2);
 /*
 localX * cos(avgHeading) - localY * sin(avgHeading);
 */
-  double fieldX = localY * cos(avgHeading) - localX * sin(avgHeading);
+  double fieldX = (localY * sin(avgHeading)) + (localX * cos(avgHeading));
   /*
 localY * sin(avgHeading) + localX * cos(avgHeading);
 */        
-  double fieldY = localY * sin(avgHeading) + localX * cos(avgHeading);
+  double fieldY = (localY * cos(avgHeading)) - (localX * sin(avgHeading));
  
   // Update position
   robotX += fieldX;
@@ -115,9 +115,9 @@ int startOdom(){
 }
 
 void driveToPoint(double goalX, double goalY, bool reverse) {
-  RemoteControlCodeEnabled = false;
   resetPID();
   lookAtPoint(goalX,goalY,reverse);
+  RemoteControlCodeEnabled = false;
   resetPID();
   double headingError;
   while(1){
