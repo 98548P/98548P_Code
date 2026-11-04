@@ -8,7 +8,7 @@ motor rightB(PORT4, ratio6_1, true);
 motor_group LeftDrive(leftA, leftB);
 motor_group RightDrive(rightA, rightB);
 
-inertial InertialSensor(PORT3);
+inertial InertialSensor(PORT7);
 
 float drive_kP = 1.0;
 float drive_kI = 0.00;

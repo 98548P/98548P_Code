@@ -11,8 +11,8 @@ double prevSide = 0;
 double prevHeading = 0;
 double robotHeading = 0;
 
-double forwardOffset = 0;  // inches
-double sideOffset = 0;     // inches
+double forwardOffset = 1.5;  // inches
+double sideOffset = 1.5;     // inches
 
 
 double wrapAngle(double angle){
@@ -30,6 +30,7 @@ double degToInches(double deg){
 
 void calculateOdometry(){
 
+  
   // Read sensors
   double forward = degToInches(forwardWheel.position(deg));
   double side = degToInches(strafeWheel.position(deg));
