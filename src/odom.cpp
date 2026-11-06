@@ -35,7 +35,7 @@ void calculateOdometry(){
   double forward = degToInches(forwardWheel.position(deg));
   double side = degToInches(strafeWheel.position(deg));
  //double forward = (forwardWheel.position(turns) * 2.75 * M_PI);
-// double side = (strafeWheel.position(turns) * 2.75 * M_PI);
+ // double side = (strafeWheel.position(turns) * 2.75 * M_PI);
   double heading = InertialSensor.rotation(deg) * M_PI / 180.0;
   robotHeading = wrapAngle(heading);
   // Calculate deltas

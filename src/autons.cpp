@@ -9,7 +9,9 @@ int testAuton = 0;
 void SkillAuton () {
 
   Drivetrain.setDriveVelocity(100,percent);
-  OUTIN.spin(forward);
+  /*
+  
+  Drivetrain.drive(forward);
   wait(0.4,seconds);
   OUTIN.stop();
   Drivetrain.turnFor(330,degrees);
@@ -22,7 +24,8 @@ void SkillAuton () {
     wait(0.2,seconds);
     Drivetrain.stop();
   }
-  Drivetrain.drive(reverse);
+  */
+  Drivetrain.drive(forward);
   wait(0.8,sec);
   Drivetrain.stop();
 }
