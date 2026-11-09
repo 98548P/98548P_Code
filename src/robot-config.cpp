@@ -27,6 +27,7 @@ motor Cascade2 = motor(PORT11, ratio36_1, false);
 motor_group Cascade = motor_group(Cascade1, Cascade2);
 digital_out Pin_grabber = digital_out(Brain.ThreeWirePort.A);
 digital_out Pin_lifter = digital_out(Brain.ThreeWirePort.B);
+digital_out Pin_claw = digital_out(Brain.ThreeWirePort.C);
 
 // VEXcode generated functions
 // define variable for remote controller enable/disable
@@ -102,6 +103,10 @@ int Controlle() {
         }
       } else {
         Cascade.stop(hold);
+      }
+
+      if((Cascade.position(rev) > 2.2 && Cascade.position(rev) < 5.3) && pnum2 == false) {
+        Controller1.rumble("-");
       }
 
         }

@@ -21,6 +21,7 @@ extern motor_group OUTIN;
 extern motor_group Cascade;
 extern digital_out Pin_grabber;
 extern digital_out Pin_lifter;
+extern digital_out Pin_claw;
 
 //Driving colsom man
 extern motor leftMotorA;

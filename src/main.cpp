@@ -27,7 +27,7 @@ competition Competition;
 //                                                     
 //////////////////////////////////////////// 
 
-bool Goal = true, pnum2 = false, pnum1 = false;
+bool Goal = true, pnum2 = false, pnum1 = false, pnum3 = false;
 
 
 
@@ -93,11 +93,8 @@ void onevent_Controller1ButtonA_pressed_0() {
 }
 
 void onevent_Controller1ButtonB_pressed_0() {
-  if(screen == 303){
-    lookAtPoint(0, 0, false);
-  } else {
-
-  }
+  pnum3 = !pnum3;
+  Pin_claw.set(pnum3);
 }
 
 ////////////////////////////////////////////
@@ -148,7 +145,7 @@ int main() {
   Brain.Screen.pressed(onevent_Brain_screen_pressed_0);
 
   Controller1.ButtonA.pressed(onevent_Controller1ButtonA_pressed_0);
-  //Controller1.ButtonB.pressed(onevent_Controller1ButtonB_pressed_0);
+  Controller1.ButtonB.pressed(onevent_Controller1ButtonB_pressed_0);
   //Drivetrain.setDriveVelocity();
   //Controller1.ButtonX.pressed(plzdelete);
   //Controller1.ButtonUp.pressed();

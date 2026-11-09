@@ -18,6 +18,7 @@
 #include "functions.h"
 #include "autons.h"
 
+extern bool pnum2;
 
 #define waitUntil(condition)                                                   \
   do {                                                                         \

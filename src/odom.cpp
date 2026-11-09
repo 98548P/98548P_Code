@@ -120,25 +120,35 @@ void driveToPoint(double goalX, double goalY, bool reverse) {
   lookAtPoint(goalX,goalY,reverse);
   RemoteControlCodeEnabled = false;
   resetPID();
+  double absoluteHeading = robotHeading;
   double headingError;
   while(1){
   double dx = (goalX- robotX);
   double dy = (goalY - robotY);
 
   double d = sqrt((dx * dx)+ (dy * dy));
+
+    headingError = absoluteHeading - robotHeading;
+
+    while (headingError > 180) headingError -= 360;
+    while (headingError < -180) headingError += 360;
+
+
+  /*
   if (reverse == true){
   headingError = wrapAngle(atan2(dy, dx) - (robotHeading + M_PI) );
   } else {
   headingError = wrapAngle(atan2(dy, dx) - robotHeading);
   }
+  */
 
-  double headingErrorDeg = headingError * (180 / M_PI);
   double drivePower = drivePID(d);
-  double turnPower = turnPID(headingErrorDeg);
+  double turnPower = turnPID(headingError);
   if( (fabs(prevDriveError) < 0.5) && (fabs(turnPrevError) < 0.5) ){
     LeftDrive.stop();
     RightDrive.stop();
     break;
+    return;
   }
 
   drivePower = drivePower * cos(headingError);
@@ -179,13 +189,26 @@ RemoteControlCodeEnabled = false;
   if( (fabs(turnPrevError) < 0.5) ){
     Drivetrain.stop();
     break;
+    return;
   }
 
 
-  RightDrive.spin(vex::reverse, (turnPower), percent);
-  LeftDrive.spin(vex::forward, (turnPower), percent);
+  RightDrive.spin(vex::forward, (turnPower), percent);
+  LeftDrive.spin(vex::reverse, (turnPower), percent);
 
 wait(15, msec);
   }
   RemoteControlCodeEnabled = true;
 }
+
+void setPos(double x, double y, double heading ){
+  InertialSensor.setHeading(heading,degrees);
+  robotX = x;
+  robotY = y;
+  prevForward = 0;
+  prevHeading = heading;
+  prevSide = 0;
+  strafeWheel.setPosition(0, degrees);
+  forwardWheel.setPosition(0,degrees);
+}
+

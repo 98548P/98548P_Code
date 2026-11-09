@@ -40,3 +40,4 @@ extern void resetPID();
 extern float prevDriveError;
 extern float turnPrevError;
 
+extern void turnHeadingPID(float targetHeading);
