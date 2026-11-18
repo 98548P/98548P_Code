@@ -66,14 +66,17 @@ void BlueCenter2 () {
 }
 
 void RedCenter1 () {
+  driveToPoint(0,24,true);
 
 }
 
 void RedCenter2 () {
-
+  driveToPoint(0,24,false);
 }
 
 void RedRight1 () {
+  setPos(0,-63,0);
+
 
 }
 

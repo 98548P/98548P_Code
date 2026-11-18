@@ -11,7 +11,7 @@ double prevSide = 0;
 double prevHeading = 0;
 double robotHeading = 0;
 
-double forwardOffset = 1.5;  // inches
+double forwardOffset = 1.8;  // inches
 double sideOffset = 1.5;     // inches
 
 
@@ -121,17 +121,27 @@ void driveToPoint(double goalX, double goalY, bool reverse) {
   RemoteControlCodeEnabled = false;
   resetPID();
   double absoluteHeading = robotHeading;
+  double absoluteWheel = forwardWheel.position(deg);
   double headingError;
-  while(1){
   double dx = (goalX- robotX);
   double dy = (goalY - robotY);
 
   double d = sqrt((dx * dx)+ (dy * dy));
+  d = inchesToTrackingDegrees(d);
+  double dtraveled;
+  while(1){
 
+    
     headingError = absoluteHeading - robotHeading;
 
     while (headingError > 180) headingError -= 360;
     while (headingError < -180) headingError += 360;
+    if(reverse == true) {
+    dtraveled = d - (absoluteWheel - forwardWheel.position(deg));
+    } else {
+     dtraveled = d - (forwardWheel.position(deg) - absoluteWheel);
+    }
+
 
 
   /*
@@ -142,24 +152,25 @@ void driveToPoint(double goalX, double goalY, bool reverse) {
   }
   */
 
-  double drivePower = drivePID(d);
+  double drivePower = drivePID(dtraveled);
   double turnPower = turnPID(headingError);
-  if( (fabs(prevDriveError) < 0.5) && (fabs(turnPrevError) < 0.5) ){
+
+   char buffer[50];
+   snprintf(buffer, 50, "%.2f", prevDriveError);
+      const char* e = buffer;
+  drawButton(0, 0, 480, 272, black, white, 3, e, 0, mono60, false);
+  if( (fabs(prevDriveError) < 0.5)){
     LeftDrive.stop();
     RightDrive.stop();
     break;
     return;
   }
 
-  drivePower = drivePower * cos(headingError);
-  if(reverse == true){
-    drivePower = -drivePower;
-  RightDrive.spin(forward, (drivePower - turnPower), percent);
-  LeftDrive.spin(forward, (drivePower + turnPower), percent);
-  } else {
-  RightDrive.spin(forward, (drivePower - turnPower), percent);
-  LeftDrive.spin(forward, (drivePower + turnPower), percent);
-  }
+
+  RightDrive.spin(forward, (drivePower /*- turnPower*/), percent);
+  LeftDrive.spin(forward, (drivePower /*+ turnPower*/), percent);
+
+  
   wait(15, msec);
   }
   RemoteControlCodeEnabled = true;
@@ -178,9 +189,9 @@ RemoteControlCodeEnabled = false;
   double dx = (goalX - robotX);
   double dy = (goalY - robotY);
   if (reverse == true){
-  headingError = wrapAngle(atan2(dy, dx) - (robotHeading + M_PI) );
+  headingError = wrapAngle(atan2(dx, dy) - (robotHeading + M_PI) );
   } else {
-  headingError = wrapAngle(atan2(dy, dx) - robotHeading);
+  headingError = wrapAngle(atan2(dx, dy) - robotHeading);
   }
  double headingErrorDeg = headingError * (180 / M_PI);
 

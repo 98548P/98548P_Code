@@ -22,3 +22,4 @@ extern double robotY;
 extern void driveToPoint(double goalX, double goalY, bool reverse);
 //extern void driveToPose(double goalX, double goalY, double goalHeading, bool reverse);
 extern void lookAtPoint(double goalX, double goalY, bool reverse);
+extern void setPos(double x, double y, double heading );

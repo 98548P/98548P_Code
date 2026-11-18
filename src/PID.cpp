@@ -1,16 +1,16 @@
 #include "vex.h"
 
-motor leftA(PORT9, ratio6_1, false);
-motor leftB(PORT10, ratio6_1, false);
-motor rightA(PORT2, ratio6_1, true);
-motor rightB(PORT4, ratio6_1, true);
+motor leftA(PORT6, ratio6_1, false);
+motor leftB(PORT4, ratio6_1, false);
+motor rightA(PORT10, ratio6_1, true);
+motor rightB(PORT9, ratio6_1, true);
 
 motor_group LeftDrive(leftA, leftB);
 motor_group RightDrive(rightA, rightB);
 
 inertial InertialSensor(PORT7);
 
-float drive_kP = 0.01;
+float drive_kP = 0.1;
 float drive_kI = 0.00;
 float drive_kD = 0.00;
    
@@ -50,7 +50,7 @@ float inchesToTrackingDegrees(float inches) {
 
 double drivePID(float input)
 {
-  float error = inchesToTrackingDegrees(input);
+  float error = input;
   float power, derivative;
 
   driveIntegral += error;
@@ -61,7 +61,7 @@ double drivePID(float input)
   derivative = (error - prevDriveError);
   prevDriveError = error;
 
-  power = error*drive_kP + driveIntegral*drive_kI + derivative*drive_kD;
+  power = (error*drive_kP) + (driveIntegral*drive_kI) + (derivative*drive_kD);
 
   if (power > 100) power = 100;
   if (power < -100) power = -100;
@@ -91,7 +91,7 @@ double turnPID(float turnAngle) {
   derivative = (error - turnPrevError);
   turnPrevError = error;
 
-  power = error*turn_kP + turnIntegral*turn_kI + derivative*turn_kD;
+  power = (error*turn_kP) + (turnIntegral*turn_kI) + (derivative*turn_kD);
 
   if (power > 100) power = 100;
   if (power < -100) power = -100;

@@ -40,4 +40,5 @@ extern void resetPID();
 extern float prevDriveError;
 extern float turnPrevError;
 
+extern float inchesToTrackingDegrees(float inches);
 extern void turnHeadingPID(float targetHeading);
