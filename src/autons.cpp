@@ -54,7 +54,12 @@ void BlueLeft1 () {
 }
 
 void BlueLeft2 () {
-
+  Pin_grabber.set(true);
+  driveToPoint(0,24,false);
+  Pin_lifter.set(true);
+ // Cascade.spinTo(2.2,rev);
+  driveToPoint(24,24,false);
+  Pin_grabber.set(false);
 }
 
 void BlueCenter1 () {

@@ -20,9 +20,11 @@ float turn_kD = 0.00;
 
 float prevDriveError = 0;
 float driveIntegral = 0;
+float driveDerivative = 0;
 
-float turnPrevError = 0;
+float turningError = 0;
 float turnIntegral = 0;
+float turnDerivative = 0;
 
 void resetMotors() {
   leftA.setPosition(0,degrees);
@@ -51,24 +53,21 @@ float inchesToTrackingDegrees(float inches) {
 double drivePID(float input)
 {
   float error = input;
-  float power, derivative;
+  float power;
 
   driveIntegral += error;
 
   if (driveIntegral > 50) driveIntegral = 50;
   if (driveIntegral < -50) driveIntegral = -50;
 
-  derivative = (error - prevDriveError);
+  driveDerivative = (error - prevDriveError);
   prevDriveError = error;
 
-  power = (error*drive_kP) + (driveIntegral*drive_kI) + (derivative*drive_kD);
+  power = (error*drive_kP) + (driveIntegral*drive_kI) + (driveDerivative*drive_kD);
 
   if (power > 100) power = 100;
   if (power < -100) power = -100;
 
-  if (fabs(power) < 2) {
-    power = (power > 0) ? 2 : -2;
-  }
 
   return power;
 }
@@ -76,37 +75,37 @@ double drivePID(float input)
 
 
 double turnPID(float turnAngle) {
-  float error, derivative, power;
+  float power, turnPrevError = 0;
 /*
   if (turnAngle >= 360) turnAngle -= 360;
   if (turnAngle < 0) turnAngle += 360;
 */
-  error = turnAngle;
+  turningError = turnAngle;
 
-  turnIntegral += error;
+  turnIntegral += turningError;
 
   if (turnIntegral > 50) turnIntegral = 50;
   if (turnIntegral < -50) turnIntegral = -50;
 
-  derivative = (error - turnPrevError);
-  turnPrevError = error;
+  turnDerivative = (turningError - turnPrevError);
+  turnPrevError = turningError;
 
-  power = (error*turn_kP) + (turnIntegral*turn_kI) + (derivative*turn_kD);
+  power = (turningError*turn_kP) + (turnIntegral*turn_kI) + (turnDerivative*turn_kD);
 
   if (power > 100) power = 100;
   if (power < -100) power = -100;
 
-  if (fabs(power) < 2) {
-    power = (power > 0) ? 2 : -2;
-  }
+
   return power;
 }
 
 void resetPID(){
   prevDriveError = 0;
   driveIntegral = 0;
-  turnPrevError = 0;
+  turningError = 0;
   turnIntegral = 0;
+  driveDerivative = 0;
+  driveIntegral = 0;
 }
 
 /*

@@ -136,30 +136,25 @@ void driveToPoint(double goalX, double goalY, bool reverse) {
 
     while (headingError > 180) headingError -= 360;
     while (headingError < -180) headingError += 360;
-    if(reverse == true) {
-    dtraveled = d - (absoluteWheel - forwardWheel.position(deg));
-    } else {
      dtraveled = d - (forwardWheel.position(deg) - absoluteWheel);
-    }
+    
 
 
 
-  /*
+  
   if (reverse == true){
-  headingError = wrapAngle(atan2(dy, dx) - (robotHeading + M_PI) );
-  } else {
-  headingError = wrapAngle(atan2(dy, dx) - robotHeading);
+    dtraveled = dtraveled - (dtraveled * 2);
   }
-  */
+  
 
   double drivePower = drivePID(dtraveled);
   double turnPower = turnPID(headingError);
 
-   char buffer[50];
-   snprintf(buffer, 50, "%.2f", prevDriveError);
-      const char* e = buffer;
-  drawButton(0, 0, 480, 272, black, white, 3, e, 0, mono60, false);
-  if( (fabs(prevDriveError) < 0.5)){
+ //  char buffer[50];
+  // snprintf(buffer, 50, "%.2f", prevDriveError);
+   //   const char* e = buffer;
+ // drawButton(0, 0, 480, 272, black, white, 3, e, 0, mono60, false);
+  if( (fabs(prevDriveError) < 0.5) && (fabs(driveDerivative) < 0.5)){
     LeftDrive.stop();
     RightDrive.stop();
     break;
@@ -167,8 +162,8 @@ void driveToPoint(double goalX, double goalY, bool reverse) {
   }
 
 
-  RightDrive.spin(forward, (drivePower /*- turnPower*/), percent);
-  LeftDrive.spin(forward, (drivePower /*+ turnPower*/), percent);
+  RightDrive.spin(forward, (drivePower - turnPower), percent);
+  LeftDrive.spin(forward, (drivePower + turnPower), percent);
 
   
   wait(15, msec);
@@ -189,23 +184,23 @@ RemoteControlCodeEnabled = false;
   double dx = (goalX - robotX);
   double dy = (goalY - robotY);
   if (reverse == true){
-  headingError = wrapAngle(atan2(dx, dy) - (robotHeading + M_PI) );
+  headingError = wrapAngle(atan2(dy, dx) - (robotHeading + M_PI) );
   } else {
-  headingError = wrapAngle(atan2(dx, dy) - robotHeading);
+  headingError = wrapAngle(atan2(dy, dx) - robotHeading);
   }
- double headingErrorDeg = headingError * (180 / M_PI);
+ double headingErrorDeg = headingError * (M_PI / 180);
 
   double turnPower = turnPID(headingErrorDeg);
 
-  if( (fabs(turnPrevError) < 0.5) ){
+  if( (fabs(turningError) < 0.5) && (fabs(turnDerivative) < 0.1) ){
     Drivetrain.stop();
     break;
     return;
   }
 
 
-  RightDrive.spin(vex::forward, (turnPower), percent);
-  LeftDrive.spin(vex::reverse, (turnPower), percent);
+  RightDrive.spin(vex::reverse, (turnPower), percent);
+  LeftDrive.spin(vex::forward, (turnPower), percent);
 
 wait(15, msec);
   }
