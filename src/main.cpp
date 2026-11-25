@@ -69,7 +69,7 @@ void onevent_Controller1ButtonY_pressed_0() {
 }
 
 void onevent_Controller1ButtonX_pressed_0() {
-
+  driveToPoint(0,30,false);
 }
 
 
@@ -112,6 +112,7 @@ void VEXcode_driver_task() {
 RemoteControlCodeEnabled = true;
 
 
+
   while(Competition.isDriverControl() && Competition.isEnabled()) {this_thread::sleep_for(10);}
 
   return;
@@ -147,7 +148,7 @@ int main() {
   Controller1.ButtonA.pressed(onevent_Controller1ButtonA_pressed_0);
   Controller1.ButtonB.pressed(onevent_Controller1ButtonB_pressed_0);
   //Drivetrain.setDriveVelocity();
-  //Controller1.ButtonX.pressed(plzdelete);
+  Controller1.ButtonX.pressed(onevent_Controller1ButtonX_pressed_0);
   //Controller1.ButtonUp.pressed();
   //Controller1.ButtonDown.pressed();
   //Controller1.ButtonX.pressed(PIcount);

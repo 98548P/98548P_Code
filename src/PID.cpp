@@ -10,18 +10,17 @@ motor_group RightDrive(rightA, rightB);
 
 inertial InertialSensor(PORT7);
 
-float drive_kP = 0.1;
+float drive_kP = 0.05;
 float drive_kI = 0.00;
-float drive_kD = 0.00;
+float drive_kD = 00;
    
-float turn_kP = 0.3;
-float turn_kI = 0.0;
-float turn_kD = 0.00;
+float turn_kP = 0.43;
+float turn_kI = 0.005;
+float turn_kD = 0.005;
 
 float prevDriveError = 0;
 float driveIntegral = 0;
-float driveDerivative = 0;
-
+float driveDerivative = 0.0;
 float turningError = 0;
 float turnIntegral = 0;
 float turnDerivative = 0;
@@ -42,7 +41,7 @@ float turnError(float target, float current) {
   return error;
 }
 
-const float trackingWheelDiameter = 2.0; // inches
+const float trackingWheelDiameter = 2.75; // inches
 
 float inchesToTrackingDegrees(float inches) {
   float circumference = M_PI * trackingWheelDiameter;

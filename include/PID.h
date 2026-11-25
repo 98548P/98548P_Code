@@ -24,7 +24,7 @@ extern float drive_kI;
 extern float drive_kD;
 //float drive_turn_kP = 0.1;
 
-// Turn PID. Not tuned!
+// Turn PID.
 extern float turn_kP;
 extern float turn_kI;
 extern float turn_kD;

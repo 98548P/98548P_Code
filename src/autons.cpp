@@ -31,6 +31,8 @@ void SkillAuton () {
 }
 
 void BlueLeft1 () {
+  Pin_claw.set(true);
+Pin_grabber.set(true);
   Drivetrain.setStopping(brake);
   Drivetrain.setDriveVelocity(100,percent);
   Brain.Screen.clearScreen();
@@ -86,7 +88,7 @@ void RedRight1 () {
 }
 
 void RedRight2 () {
-
+driveToPoint(0,-24,false);
 }
 
 float runAuton() {

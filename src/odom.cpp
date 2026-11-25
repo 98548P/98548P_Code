@@ -11,8 +11,8 @@ double prevSide = 0;
 double prevHeading = 0;
 double robotHeading = 0;
 
-double forwardOffset = 1.8;  // inches
-double sideOffset = 1.5;     // inches
+double forwardOffset = 1.25;  // inches
+double sideOffset = 1;     // inches
 
 
 double wrapAngle(double angle){
@@ -123,10 +123,10 @@ void driveToPoint(double goalX, double goalY, bool reverse) {
   double absoluteHeading = robotHeading;
   double absoluteWheel = forwardWheel.position(deg);
   double headingError;
-  double dx = (goalX- robotX);
+  double dx = (goalX - robotX);
   double dy = (goalY - robotY);
 
-  double d = sqrt((dx * dx)+ (dy * dy));
+  double d = sqrt((dx * dx) + (dy * dy));
   d = inchesToTrackingDegrees(d);
   double dtraveled;
   while(1){
@@ -162,8 +162,8 @@ void driveToPoint(double goalX, double goalY, bool reverse) {
   }
 
 
-  RightDrive.spin(forward, (drivePower - turnPower), percent);
-  LeftDrive.spin(forward, (drivePower + turnPower), percent);
+  RightDrive.spin(forward, (drivePower /*- turnPower*/), percent);
+  LeftDrive.spin(forward, (drivePower /*+ turnPower*/), percent);
 
   
   wait(15, msec);
@@ -180,19 +180,19 @@ void lookAtPoint(double goalX, double goalY, bool reverse) {
 RemoteControlCodeEnabled = false;
   resetPID();
   double headingError;
-  while(1){
   double dx = (goalX - robotX);
   double dy = (goalY - robotY);
+  while(1){
   if (reverse == true){
-  headingError = wrapAngle(atan2(dy, dx) - (robotHeading + M_PI) );
+  headingError = wrapAngle(atan2(dx, dy) - (robotHeading + M_PI) );
   } else {
-  headingError = wrapAngle(atan2(dy, dx) - robotHeading);
+  headingError = wrapAngle(atan2(dx, dy) - robotHeading);
   }
- double headingErrorDeg = headingError * (M_PI / 180);
+ double headingErrorDeg = headingError * (180 / M_PI);
 
   double turnPower = turnPID(headingErrorDeg);
 
-  if( (fabs(turningError) < 0.5) && (fabs(turnDerivative) < 0.1) ){
+  if( (fabs(turningError) < 1) && (fabs(turnDerivative) < 0.1)) {
     Drivetrain.stop();
     break;
     return;
